@@ -8,7 +8,10 @@ For this KB, I'm using [VimWiki](https://github.com/vimwiki/vimwiki), a _**Perso
 let g:vimwiki_list = [{'path': '~/vimwiki/',
                       \ 'syntax': 'markdown', 'ext': '.md'}]
 ```
-To search across the KB, you can use `:VWS <search pattern>`
+
+To search across the KB, you can use
+
+```:VWS <search pattern>```
 
 To make this even more convenient, I've also installed [vim-instant-markdown](https://github.com/suan/vim-instant-markdown) which (as the name implies) instantly opens a browser window when opening a markdown file with a formatted preview of any italics, blockquotes, ordered-lists, images, code, etc.  
 
