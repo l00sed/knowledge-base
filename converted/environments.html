@@ -57,5 +57,66 @@ export -f mkgif</code></pre><h4 id="5.-connected-android-phone-mirroring"><a cla
       poly <span class="hljs-string">"<span class="hljs-variable">$image</span>"</span>
   <span class="hljs-keyword">done</span>
 }
-<span class="hljs-built_in">export</span> <span class="hljs-_">-f</span> polyAll</code></pre></body>
+<span class="hljs-built_in">export</span> <span class="hljs-_">-f</span> polyAll</code></pre><h3 id="~/.vimrc"><a class="header-link" href="#~/.vimrc"></a>~/.vimrc</h3>
+<ol class="list">
+<li>Vimwiki settings </li>
+</ol>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> g:vimwiki_list = [{<span class="hljs-string">'path'</span>: <span class="hljs-string">'~/vimwiki/'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'syntax'</span>: <span class="hljs-string">'markdown'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'template_path'</span>: <span class="hljs-string">'~/vimwiki/templates/'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'template_default'</span>: <span class="hljs-string">'default'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'ext'</span>: <span class="hljs-string">'.md'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'path_html'</span>: <span class="hljs-string">'/var/www/l-o-o-s-e-d/html/knowledge-base/'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'custom_wiki2html'</span>: <span class="hljs-string">'vimwiki_markdown'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'template_ext'</span>: <span class="hljs-string">'.tpl'</span>}]</code></pre><ol start="2">
+<li>Toggle wrap in vim </li>
+</ol>
+<pre class="hljs"><code><span class="hljs-keyword">noremap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Leader&gt;</span>tw :<span class="hljs-keyword">call</span> ToggleWrap()<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ToggleWrap</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">if</span> &amp;wrap
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Wrap OFF"</span>
+    <span class="hljs-keyword">setlocal</span> nowrap
+    <span class="hljs-keyword">set</span> virtualedit=<span class="hljs-keyword">all</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Wrap ON"</span>
+    <span class="hljs-keyword">setlocal</span> wrap linebreak nolist
+    <span class="hljs-keyword">set</span> virtualedit=
+    <span class="hljs-keyword">setlocal</span> <span class="hljs-keyword">display</span>+=lastline
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>   gk
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span> gj
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> g<span class="hljs-symbol">&lt;Home&gt;</span>
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  g<span class="hljs-symbol">&lt;End&gt;</span>
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>   <span class="hljs-symbol">&lt;C-o&gt;</span>gk
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>gj
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;Home&gt;</span>
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;End&gt;</span>
+  <span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">endfunction</span></code></pre><ol start="3">
+<li><a href="https://github.com/itchyny/lightline.vim">Lightline</a> plugin settings </li>
+</ol>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> g:lightline = {
+<span class="hljs-string">\</span> <span class="hljs-string">'colorscheme'</span> : <span class="hljs-string">'seoul256'</span>
+<span class="hljs-string">\</span> }</code></pre><ol start="4">
+<li>Other loaded plugins</li>
+</ol>
+<pre class="hljs"><code>call plug#begin(<span class="hljs-string">'~/.vim/plugged'</span>)
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'itchyny</span>/lightline.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'edkolev</span>/tmuxline.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'scrooloose</span>/nerdtree'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/goyo.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'etdev</span>/vim-hexcolor'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'Yggdroot</span>/indentLine'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/vim-emoji'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-scripts/<span class="hljs-type">AutoComplPop'</span>
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vimwiki</span>/vimwiki'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'suan</span>/vim-instant-markdown', {<span class="hljs-symbol">'for'</span>: <span class="hljs-symbol">'markdown'</span>}
+call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre></body>
 </html>
