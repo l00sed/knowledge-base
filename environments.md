@@ -52,3 +52,36 @@ alias android='scrcpy --max-size 1080 --window-x 1920 --window-y 1080 --window-b
 alias androidF='android --fullscreen'
 ```
 
+#### 6. Easy/beautiful low-quality image placeholders (LQIP) 
+
+- Must install [GO](https://medium.com/better-programming/install-go-1-11-on-ubuntu-18-04-16-04-lts-8c098c503c5f) 
+- Uses [primitive](https://github.com/fogleman/primitive) command-line utility 
+
+```
+# polygonized lqip image for single file
+function poly() {
+  if [ ${1##*.} != "gif" ]
+    then
+      primitive -i $1 -o lqip/${1%.*}-lqip.${1##*.} -r 64 -s 64 -bg 'avg' -n 150 -v
+  fi
+  if [ ${1##*.} = "gif" ]
+    then
+      convert "$1[0]" temp.gif
+      primitive -i temp.gif -o lqip/${1%.*}-lqip.jpg -bg 'avg' -r 64 -s 64 -n 150 -v
+      rm temp.gif
+  fi
+}
+export -f poly
+```
+
+```
+# polygonized lqip images for all image in a directory
+polyAll () {
+  for image in *;
+    do
+      poly "$image"
+  done
+}
+export -f polyAll
+```
+
