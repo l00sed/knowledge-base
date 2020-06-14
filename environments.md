@@ -1,8 +1,11 @@
 ## Environments
 
+- [.bashrc](#bashrc) 
+- [.vimrc](#vimrc) 
+
 <br>
 
-### ~/.bashrc
+### ~/.bashrc<a name="bashrc"></a>
 
 #### 1. Pretty Bash Prompt 
 
@@ -89,7 +92,7 @@ export -f polyAll
 
 <br> 
 
-### ~/.vimrc  
+### ~/.vimrc<a name="vimrc"></a> 
 
 1. Vimwiki settings 
 
