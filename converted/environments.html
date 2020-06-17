@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Environments</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="assets/style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="assets/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/tomorrow-night-eighties.css" />
+  </head>
+<body><h2 id="environments"><a class="header-link" href="#environments"></a>Environments</h2>
+<ul class="list">
+<li><a href="#bashrc">.bashrc</a> </li>
+<li><a href="#vimrc">.vimrc</a> </li>
+</ul>
+<p><br></p>
+<p><a id='bashrc'></a> </p>
+<h3 id="~/.bashrc"><a class="header-link" href="#~/.bashrc"></a>~/.bashrc</h3>
+<h5 id="1.-pretty-bash-prompt"><a class="header-link" href="#1.-pretty-bash-prompt"></a>1. Pretty Bash Prompt</h5>
+<pre class="hljs"><code>RCol='<span class="hljs-symbol">\0</span>33[0m'
+Gre='<span class="hljs-symbol">\0</span>33[32m';
+Red='<span class="hljs-symbol">\0</span>33[31m';
+Blu='<span class="hljs-symbol">\0</span>33[34m';
+Yel='<span class="hljs-symbol">\0</span>33[33m';
+PS1="${RCol}┌─[<span class="hljs-symbol">\`</span>if [ <span class="hljs-symbol">\$</span>? = 0 ]; then echo "${Gre}"; else echo "${Red}"; fi<span class="hljs-symbol">\`</span><span class="hljs-symbol">\T</span><span class="hljs-symbol">\[</span>${Rcol}<span class="hljs-symbol">\]</span> <span class="hljs-symbol">\[</span>${Blu}<span class="hljs-symbol">\]</span><span class="hljs-symbol">\u</span>@<span class="hljs-symbol">\h</span><span class="hljs-symbol">\[</span>${RCol}<span class="hljs-symbol">\]</span> <span class="hljs-symbol">\[</span>${Yel}<span class="hljs-symbol">\]</span><span class="hljs-symbol">\w</span><span class="hljs-symbol">\[</span>${RCol}<span class="hljs-symbol">\]</span><span class="hljs-symbol">\$</span>(__git_ps1)]<span class="hljs-symbol">\n</span>└───▶ "</code></pre><h5 id="2.-quick-and-handy-server-alias"><a class="header-link" href="#2.-quick-and-handy-server-alias"></a>2. Quick and handy server alias</h5>
+<pre class="hljs"><code>npm <span class="hljs-keyword">install</span> -g browser-<span class="hljs-keyword">sync</span>
+<span class="hljs-keyword">export</span> ip4=$(ifdata -pa wlp2s0)
+<span class="hljs-keyword">alias</span> serve=<span class="hljs-string">"browser-sync start -s -f . --no-notify --extensions 'html' --host $ip4 --port 9000"</span></code></pre><h5 id="3.-tmux"><a class="header-link" href="#3.-tmux"></a>3. Tmux</h5>
+<pre class="hljs"><code><span class="hljs-built_in">alias</span> td=<span class="hljs-string">'tmux detach'</span>
+<span class="hljs-built_in">alias</span> t0=<span class="hljs-string">'tmux attach -t 0'</span>
+<span class="hljs-built_in">alias</span> t1=<span class="hljs-string">'tmux attach -t 1'</span>
+<span class="hljs-built_in">alias</span> t2=<span class="hljs-string">'tmux attach -t 2'</span>
+<span class="hljs-built_in">alias</span> tmain=<span class="hljs-string">'tmux attach -t main'</span></code></pre><h5 id="4.-ffmpeg"><a class="header-link" href="#4.-ffmpeg"></a>4. FFMpeg</h5>
+<pre class="hljs"><code><span class="hljs-built_in">alias</span> mkvid='ffmpeg -r <span class="hljs-number">1</span> -f image2 -pattern_type glob -i <span class="hljs-string">"*.png"</span> -vf <span class="hljs-built_in">scale</span>=<span class="hljs-number">720</span>:<span class="hljs-number">480</span> -filter:v <span class="hljs-string">"crop=in_w:480"</span> -vcodec libx264 -crf <span class="hljs-number">0</span> -pix_fmt yuv444p test.mp4'
+<span class="hljs-built_in">alias</span> convgif='ffmpeg -i test.mp4 -vf <span class="hljs-built_in">scale</span>=iw/<span class="hljs-number">2</span>:ih/<span class="hljs-number">2</span> -f gif test.gif'</code></pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mkgif</span><span class="hljs-params">()</span> {</span>
+  ffmpeg -pattern_type glob -r <span class="hljs-number">1</span> -i <span class="hljs-string">"$1"</span> -vf <span class="hljs-string">"scale='</span><span class="hljs-built_in">min</span>(<span class="hljs-number">640</span>,iw)<span class="hljs-string">':'</span><span class="hljs-built_in">min</span>(<span class="hljs-number">480</span>,ih)<span class="hljs-string">':force_original_aspect_ratio=decrease,pad=640:480:(ow-iw)/2:(oh-ih)/2"</span> -pix_fmt yuv420p -f gif output.gif
+}
+export -f mkgif</code></pre><h5 id="5.-connected-android-phone-mirroring"><a class="header-link" href="#5.-connected-android-phone-mirroring"></a>5. Connected Android phone mirroring</h5>
+<pre class="hljs"><code><span class="hljs-keyword">alias</span> android=<span class="hljs-symbol">'scrcpy</span> <span class="hljs-comment">--max-size 1080 --window-x 1920 --window-y 1080 --window-borderless -S'</span>
+<span class="hljs-keyword">alias</span> androidF=<span class="hljs-symbol">'android</span> <span class="hljs-comment">--fullscreen'</span></code></pre><h5 id="6.-easy/beautiful-low-quality-image-placeholders-(lqip)"><a class="header-link" href="#6.-easy/beautiful-low-quality-image-placeholders-(lqip)"></a>6. Easy/beautiful low-quality image placeholders (LQIP)</h5>
+<ul class="list">
+<li>Must install <a href="https://medium.com/better-programming/install-go-1-11-on-ubuntu-18-04-16-04-lts-8c098c503c5f">GO</a> </li>
+<li>Uses <a href="https://github.com/fogleman/primitive">primitive</a> command-line utility </li>
+</ul>
+<pre class="hljs"><code><span class="hljs-comment"># polygonized lqip image for single file</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">poly</span></span>() {
+  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">${1##*.}</span> != <span class="hljs-string">"gif"</span> ]
+    <span class="hljs-keyword">then</span>
+      primitive -i <span class="hljs-variable">$1</span> -o lqip/<span class="hljs-variable">${1%.*}</span>-lqip.<span class="hljs-variable">${1##*.}</span> -r 64 <span class="hljs-_">-s</span> 64 -bg <span class="hljs-string">'avg'</span> -n 150 -v
+  <span class="hljs-keyword">fi</span>
+  <span class="hljs-keyword">if</span> [ <span class="hljs-variable">${1##*.}</span> = <span class="hljs-string">"gif"</span> ]
+    <span class="hljs-keyword">then</span>
+      convert <span class="hljs-string">"<span class="hljs-variable">$1</span>[0]"</span> temp.gif
+      primitive -i temp.gif -o lqip/<span class="hljs-variable">${1%.*}</span>-lqip.jpg -bg <span class="hljs-string">'avg'</span> -r 64 <span class="hljs-_">-s</span> 64 -n 150 -v
+      rm temp.gif
+  <span class="hljs-keyword">fi</span>
+}
+<span class="hljs-built_in">export</span> <span class="hljs-_">-f</span> poly</code></pre><pre class="hljs"><code><span class="hljs-comment"># polygonized lqip images for all image in a directory</span>
+<span class="hljs-function"><span class="hljs-title">polyAll</span></span> () {
+  <span class="hljs-keyword">for</span> image <span class="hljs-keyword">in</span> *;
+    <span class="hljs-keyword">do</span>
+      poly <span class="hljs-string">"<span class="hljs-variable">$image</span>"</span>
+  <span class="hljs-keyword">done</span>
+}
+<span class="hljs-built_in">export</span> <span class="hljs-_">-f</span> polyAll</code></pre><p><br> </p>
+<p><a id='vimrc'></a> </p>
+<h3 id="~/.vimrc"><a class="header-link" href="#~/.vimrc"></a>~/.vimrc</h3>
+<h5 id="1.-vimwiki-settings"><a class="header-link" href="#1.-vimwiki-settings"></a>1. Vimwiki settings</h5>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> g:vimwiki_list = [{<span class="hljs-string">'path'</span>: <span class="hljs-string">'~/vimwiki/'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'syntax'</span>: <span class="hljs-string">'markdown'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'template_path'</span>: <span class="hljs-string">'~/vimwiki/templates/'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'template_default'</span>: <span class="hljs-string">'default'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'ext'</span>: <span class="hljs-string">'.md'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'path_html'</span>: <span class="hljs-string">'/var/www/l-o-o-s-e-d/html/knowledge-base/'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'custom_wiki2html'</span>: <span class="hljs-string">'vimwiki_markdown'</span>,
+      <span class="hljs-string">\</span> <span class="hljs-string">'template_ext'</span>: <span class="hljs-string">'.tpl'</span>}]</code></pre><h5 id="2.-toggle-wrap-in-vim"><a class="header-link" href="#2.-toggle-wrap-in-vim"></a>2. Toggle wrap in vim</h5>
+<pre class="hljs"><code><span class="hljs-keyword">noremap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Leader&gt;</span>tw :<span class="hljs-keyword">call</span> ToggleWrap()<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ToggleWrap</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">if</span> &amp;wrap
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Wrap OFF"</span>
+    <span class="hljs-keyword">setlocal</span> nowrap
+    <span class="hljs-keyword">set</span> virtualedit=<span class="hljs-keyword">all</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Wrap ON"</span>
+    <span class="hljs-keyword">setlocal</span> wrap linebreak nolist
+    <span class="hljs-keyword">set</span> virtualedit=
+    <span class="hljs-keyword">setlocal</span> <span class="hljs-keyword">display</span>+=lastline
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>   gk
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span> gj
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> g<span class="hljs-symbol">&lt;Home&gt;</span>
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  g<span class="hljs-symbol">&lt;End&gt;</span>
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>   <span class="hljs-symbol">&lt;C-o&gt;</span>gk
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>gj
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;Home&gt;</span>
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;End&gt;</span>
+  <span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">endfunction</span></code></pre><h5 id="3.-[lightline](https://github.com/itchyny/lightline.vim)-plugin-settings"><a class="header-link" href="#3.-[lightline](https://github.com/itchyny/lightline.vim)-plugin-settings"></a>3. <a href="https://github.com/itchyny/lightline.vim">Lightline</a> plugin settings</h5>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> g:lightline = {
+<span class="hljs-string">\</span> <span class="hljs-string">'colorscheme'</span> : <span class="hljs-string">'seoul256'</span>
+<span class="hljs-string">\</span> }</code></pre><h5 id="4.-other-loaded-plugins"><a class="header-link" href="#4.-other-loaded-plugins"></a>4. Other loaded plugins</h5>
+<pre class="hljs"><code>call plug#begin(<span class="hljs-string">'~/.vim/plugged'</span>)
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'itchyny</span>/lightline.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'edkolev</span>/tmuxline.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'scrooloose</span>/nerdtree'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/goyo.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'etdev</span>/vim-hexcolor'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'Yggdroot</span>/indentLine'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/vim-emoji'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-scripts/<span class="hljs-type">AutoComplPop'</span>
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vimwiki</span>/vimwiki'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'suan</span>/vim-instant-markdown', {<span class="hljs-symbol">'for'</span>: <span class="hljs-symbol">'markdown'</span>}
+call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre></body>
+</html>
