@@ -1,4 +1,4 @@
-# loosed 
+# [loosed](https://l-o-o-s-e-d.net)
 ## Knowledge Base
 
 Managed by [Daniel Tompkins](https://l-o-o-s-e-d.net/about)    
