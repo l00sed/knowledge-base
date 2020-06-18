@@ -35,7 +35,7 @@ For my KB, I use a bash alias to quickly convert all ```.md``` files to ```.html
 alias markdown-html='generate-md --input ./ --output ./converted/ --layout loosed-template'
 ``` 
 
-## Mobile editor
+## Mobile Editor
 
 If you want to commit edits to your KB remotely, I use the [Spck Editor](https://spck.io/). It's a nice mobile code editor with built-in GitHub functionality for pulling from or pushing to a remote repo.
 

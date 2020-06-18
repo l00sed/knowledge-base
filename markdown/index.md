@@ -9,4 +9,4 @@ Updates: 06/17/2020
 2. [Environments](environments)
   - ~/.bashrc
   - ~/.vimrc
-
+3. [Bookmarks](https://l-o-o-s-e-d.net/bookmarks)
