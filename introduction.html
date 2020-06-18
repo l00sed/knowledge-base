@@ -4,19 +4,29 @@
     <title>Introduction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" rel="stylesheet" href="assets/style.css" />
-    <link type="text/css" rel="stylesheet" href="assets/pilcrow.css" />
-    <link type="text/css" rel="stylesheet" href="assets/hljs-github.min.css"/>
-    <link type="text/css" rel="stylesheet" href="assets/tomorrow-night-eighties.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/tomorrow-night-eighties.css" />
   </head>
 <body>
-<a href="/knowledge-base">Index</a><h2 id="introduction"><a class="header-link" href="#introduction"></a>Introduction</h2>
+  <div id="top"></div>
+  <div id="index" class="noselect">
+    <a href="#top">
+      <img src="assets/img/top.svg" />
+    </a>
+    <a href="/knowledge-base">
+      <img src="assets/img/index.svg" />
+    </a>
+  </div><h1 id="introduction"><a class="header-link" href="#introduction"></a>Introduction</h1>
 <p>This document is the personal <a href="https://en.wikipedia.org/wiki/Knowledge_base">knowledge base</a> (KB) of Daniel Tompkins. More and more accounts of people (often programmers) using the KB structure to store frequently referenced information led me to begin building my own.</p>
+<h2 id="vimwiki"><a class="header-link" href="#vimwiki"></a>VimWiki</h2>
 <p>For this KB, I&#39;m using <a href="https://github.com/vimwiki/vimwiki">VimWiki</a>, a <em><strong>Personal Wiki for Vim</strong></em>, which provides a set of hotkeys in the Vim command-line text editor. This plugin allows you to instantly access your KB from anywhere in the terminal, and saves your notes in a .wiki file&mdash; or as common markdown with the following settings in your <code>~/.vimrc</code> file: </p>
 <pre class="hljs"><code><span class="hljs-keyword">let</span> g:vimwiki_list = [{<span class="hljs-string">'path'</span>: <span class="hljs-string">'~/vimwiki/'</span>,
                       <span class="hljs-string">\</span> <span class="hljs-string">'syntax'</span>: <span class="hljs-string">'markdown'</span>, <span class="hljs-string">'ext'</span>: <span class="hljs-string">'.md'</span>}]</code></pre><p>To search across the KB, you can use</p>
-<p><code>:VWS &lt;search pattern&gt;</code></p>
+<pre class="hljs"><code>:VWS <span class="hljs-tag">&lt;<span class="hljs-name">search</span> <span class="hljs-attr">pattern</span>&gt;</span></code></pre><h2 id="vim-instant-markdown"><a class="header-link" href="#vim-instant-markdown"></a>vim-instant-markdown</h2>
 <p>To make this even more convenient, I&#39;ve also installed <a href="https://github.com/suan/vim-instant-markdown">vim-instant-markdown</a> which (as the name implies) instantly opens a browser window when opening a markdown file with a formatted preview of any italics, blockquotes, ordered-lists, images, code, etc.  </p>
+<h2 id="markdown-styles"><a class="header-link" href="#markdown-styles"></a>markdown-styles</h2>
 <p>For Web, I&#39;m using the <em>generate-md</em> function that&#39;s included with <em>markdown-styles</em>: </p>
 <pre class="hljs"><code>npm <span class="hljs-keyword">install</span> -g markdown-styles</code></pre><p>For my KB, I use a bash alias to quickly convert all <code>.md</code> files to <code>.html</code>. The &quot;loosed-template&quot; is a custom variation on the included <em>jasonm23-dark</em> theme: </p>
 <pre class="hljs"><code><span class="hljs-keyword">alias</span> markdown-html='<span class="hljs-keyword">generate</span>-md --<span class="hljs-keyword">input</span> ./ --<span class="hljs-keyword">output</span> ./converted/ --layout loosed-template'</code></pre><p>If you&#39;d like to setup a similar KB structure, consider checking out the links that are provided on this page. Additionally, here&#39;s a wonderful markdown <a href="https://www.markdownguide.org/cheat-sheet/">cheatsheet</a> if you forget any syntax.</p>

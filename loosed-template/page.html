@@ -4,13 +4,21 @@
     <title>{{title}}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link type="text/css" rel="stylesheet" href="{{asset 'style.css'}}" />
-    <link type="text/css" rel="stylesheet" href="{{asset 'pilcrow.css'}}" />
-    <link type="text/css" rel="stylesheet" href="{{asset 'hljs-github.min.css'}}"/>
-    <link type="text/css" rel="stylesheet" href="{{asset 'tomorrow-night-eighties.css'}}" />
+    <link type="text/css" rel="stylesheet" href="{{asset 'css/style.css'}}" />
+    <link type="text/css" rel="stylesheet" href="{{asset 'css/pilcrow.css'}}" />
+    <link type="text/css" rel="stylesheet" href="{{asset 'css/hljs-github.min.css'}}"/>
+    <link type="text/css" rel="stylesheet" href="{{asset 'css/tomorrow-night-eighties.css'}}" />
   </head>
 <body>
-<a href="/knowledge-base">Index</a>
-{{~> content}}
+  <div id="top"></div>
+  <div id="index" class="noselect">
+    <a href="#top">
+      <img src="{{asset 'img/top.svg'}}" />
+    </a>
+    <a href="/knowledge-base">
+      <img src="{{asset 'img/index.svg'}}" />
+    </a>
+  </div>
+  {{~> content}}
 </body>
 </html>
