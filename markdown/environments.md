@@ -1,5 +1,7 @@
 # Environments
 
+Various dotfile setups and resources for setting up programming environments across various servers remote and local.
+
 - [.bashrc](#bashrc) 
 - [.vimrc](#vimrc) 
 
