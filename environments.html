@@ -23,8 +23,9 @@
 <ul class="list">
 <li><a href="#bashrc">.bashrc</a> </li>
 <li><a href="#vimrc">.vimrc</a> </li>
+<li><a href="i3">.config/i3/config</a> 
+<br></li>
 </ul>
-<p><br></p>
 <p><a id='bashrc'></a> </p>
 <h2 id="~/.bashrc"><a class="header-link" href="#~/.bashrc"></a>~/.bashrc</h2>
 <h3 id="1.-pretty-bash-prompt"><a class="header-link" href="#1.-pretty-bash-prompt"></a>1. Pretty Bash Prompt</h3>
@@ -128,5 +129,285 @@ export -f mkgif</code></pre><h3 id="5.-connected-android-phone-mirroring"><a cla
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-scripts/<span class="hljs-type">AutoComplPop'</span>
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vimwiki</span>/vimwiki'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'suan</span>/vim-instant-markdown', {<span class="hljs-symbol">'for'</span>: <span class="hljs-symbol">'markdown'</span>}
-call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre></body>
+call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre><p><br></p>
+<p><a id='i3'></a> </p>
+<h2 id="~/.config/i3/config"><a class="header-link" href="#~/.config/i3/config"></a>~/.config/i3/config</h2>
+<h3 id="1.-config-file-for-[i3wm](https://i3wm.org/)"><a class="header-link" href="#1.-config-file-for-[i3wm](https://i3wm.org/)"></a>1. Config file for <a href="https://i3wm.org/">i3wm</a></h3>
+<pre class="hljs"><code>set $mod Mod4
+
+new_window pixel <span class="hljs-number">1</span>
+new_float normal
+
+hide_edge_borders none
+
+bindsym $mod+u border none
+bindsym $mod+y border pixel <span class="hljs-number">1</span>
+bindsym $mod+n border normal
+
+font xft:URWGothic-Book <span class="hljs-number">11</span>
+
+floating_modifier $mod
+
+bindsym $mod+Return <span class="hljs-keyword">exec</span> i3-sensible-terminal
+
+# Window kill command
+bindsym $mod+Shift+q kill
+
+# start program launcher
+bindsym $mod+d <span class="hljs-keyword">exec</span> --no-startup-id rofi -show run
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# <span class="hljs-keyword">move</span> focused <span class="hljs-keyword">window</span>
+bindsym $mod+Shift+j <span class="hljs-keyword">move</span> left
+bindsym $mod+Shift+k <span class="hljs-keyword">move</span> down
+bindsym $mod+Shift+l <span class="hljs-keyword">move</span> up
+bindsym $mod+Shift+semicolon <span class="hljs-keyword">move</span> right
+
+bindsym $mod+Shift+Left <span class="hljs-keyword">move</span> left
+bindsym $mod+Shift+Down <span class="hljs-keyword">move</span> down
+bindsym $mod+Shift+Up <span class="hljs-keyword">move</span> up
+bindsym $mod+Shift+Right <span class="hljs-keyword">move</span> right
+
+# <span class="hljs-keyword">workspace</span> back and forth (with/without active <span class="hljs-keyword">container</span>)
+workspace_auto_back_and_forth yes
+bindsym $mod+b <span class="hljs-keyword">workspace</span> back_and_forth
+bindsym $mod+Shift+b <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> back_and_forth; <span class="hljs-keyword">workspace</span> back_and_forth
+
+# split orientation
+bindsym $mod+h split h;<span class="hljs-keyword">exec</span> notify-send <span class="hljs-string">'tile horizontally'</span>
+bindsym $mod+v split v;<span class="hljs-keyword">exec</span> notify-send <span class="hljs-string">'tile vertically'</span>
+bindsym $mod+q split <span class="hljs-keyword">toggle</span>
+
+# <span class="hljs-keyword">toggle</span> fullscreen mode <span class="hljs-keyword">for</span> the focused <span class="hljs-keyword">container</span>
+bindsym $mod+f fullscreen <span class="hljs-keyword">toggle</span>
+
+# change <span class="hljs-keyword">container</span> <span class="hljs-keyword">layout</span> (stacked, tabbed, <span class="hljs-keyword">toggle</span> split)
+bindsym $mod+s <span class="hljs-keyword">layout</span> stacking
+bindsym $mod+w <span class="hljs-keyword">layout</span> tabbed
+bindsym $mod+e <span class="hljs-keyword">layout</span> <span class="hljs-keyword">toggle</span> split
+
+# <span class="hljs-keyword">toggle</span> tiling / floating
+bindsym $mod+Shift+space floating <span class="hljs-keyword">toggle</span>
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# <span class="hljs-keyword">toggle</span> sticky
+bindsym $mod+Shift+s sticky <span class="hljs-keyword">toggle</span>
+
+# focus the <span class="hljs-keyword">parent</span> <span class="hljs-keyword">container</span>
+bindsym $mod+a focus <span class="hljs-keyword">parent</span>
+
+# <span class="hljs-keyword">move</span> the currently focused <span class="hljs-keyword">window</span> to the scratchpad
+bindsym $mod+Shift+minus <span class="hljs-keyword">move</span> scratchpad
+
+# Show the next scratchpad <span class="hljs-keyword">window</span> or <span class="hljs-keyword">hide</span> the focused scratchpad <span class="hljs-keyword">window</span>.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# navigate workspaces next / previous
+bindsym $mod+Ctrl+Right <span class="hljs-keyword">workspace</span> next
+bindsym $mod+Ctrl+Left <span class="hljs-keyword">workspace</span> prev
+
+# workspaces
+set $ws1 <span class="hljs-number">1</span>
+set $ws2 <span class="hljs-number">2</span>
+set $ws3 <span class="hljs-number">3</span>
+set $ws4 <span class="hljs-number">4</span>
+set $ws5 <span class="hljs-number">5</span>
+set $ws6 <span class="hljs-number">6</span>
+set $ws7 <span class="hljs-number">7</span>
+set $ws8 <span class="hljs-number">8</span>
+
+# <span class="hljs-keyword">switch</span> to <span class="hljs-keyword">workspace</span>
+bindsym $mod+<span class="hljs-number">1</span> <span class="hljs-keyword">workspace</span> $ws1
+bindsym $mod+<span class="hljs-number">2</span> <span class="hljs-keyword">workspace</span> $ws2
+bindsym $mod+<span class="hljs-number">3</span> <span class="hljs-keyword">workspace</span> $ws3
+bindsym $mod+<span class="hljs-number">4</span> <span class="hljs-keyword">workspace</span> $ws4
+bindsym $mod+<span class="hljs-number">5</span> <span class="hljs-keyword">workspace</span> $ws5
+bindsym $mod+<span class="hljs-number">6</span> <span class="hljs-keyword">workspace</span> $ws6
+bindsym $mod+<span class="hljs-number">7</span> <span class="hljs-keyword">workspace</span> $ws7
+bindsym $mod+<span class="hljs-number">8</span> <span class="hljs-keyword">workspace</span> $ws8
+
+# Move focused <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span>
+bindsym $mod+Ctrl+<span class="hljs-number">1</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws1
+bindsym $mod+Ctrl+<span class="hljs-number">2</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws2
+bindsym $mod+Ctrl+<span class="hljs-number">3</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws3
+bindsym $mod+Ctrl+<span class="hljs-number">4</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws4
+bindsym $mod+Ctrl+<span class="hljs-number">5</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws5
+bindsym $mod+Ctrl+<span class="hljs-number">6</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws6
+bindsym $mod+Ctrl+<span class="hljs-number">7</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws7
+bindsym $mod+Ctrl+<span class="hljs-number">8</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws8
+
+# Move to <span class="hljs-keyword">workspace</span> with focused <span class="hljs-keyword">container</span>
+bindsym $mod+Shift+<span class="hljs-number">1</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws1; <span class="hljs-keyword">workspace</span> $ws1
+bindsym $mod+Shift+<span class="hljs-number">2</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws2; <span class="hljs-keyword">workspace</span> $ws2
+bindsym $mod+Shift+<span class="hljs-number">3</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws3; <span class="hljs-keyword">workspace</span> $ws3
+bindsym $mod+Shift+<span class="hljs-number">4</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws4; <span class="hljs-keyword">workspace</span> $ws4
+bindsym $mod+Shift+<span class="hljs-number">5</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws5; <span class="hljs-keyword">workspace</span> $ws5
+bindsym $mod+Shift+<span class="hljs-number">6</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws6; <span class="hljs-keyword">workspace</span> $ws6
+bindsym $mod+Shift+<span class="hljs-number">7</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws7; <span class="hljs-keyword">workspace</span> $ws7
+bindsym $mod+Shift+<span class="hljs-number">8</span> <span class="hljs-keyword">move</span> <span class="hljs-keyword">container</span> to <span class="hljs-keyword">workspace</span> $ws8; <span class="hljs-keyword">workspace</span> $ws8
+
+# Open specific applications <span class="hljs-keyword">in</span> floating mode
+for_window [title=<span class="hljs-string">"alsamixer"</span>] floating enable border pixel <span class="hljs-number">1</span>
+for_window [class=<span class="hljs-string">"Calamares"</span>] floating enable border normal
+for_window [class=<span class="hljs-string">"Clipgrab"</span>] floating enable
+for_window [title=<span class="hljs-string">"File Transfer*"</span>] floating enable
+for_window [class=<span class="hljs-string">"Galculator"</span>] floating enable border pixel <span class="hljs-number">1</span>
+for_window [class=<span class="hljs-string">"GParted"</span>] floating enable border normal
+for_window [title=<span class="hljs-string">"i3_help"</span>] floating enable sticky enable border normal
+for_window [class=<span class="hljs-string">"Lightdm-gtk-greeter-settings"</span>] floating enable
+for_window [class=<span class="hljs-string">"Lxappearance"</span>] floating enable sticky enable border normal
+for_window [title=<span class="hljs-string">"MuseScore: Play Panel"</span>] floating enable
+for_window [class=<span class="hljs-string">"Nitrogen"</span>] floating enable sticky enable border normal
+for_window [class=<span class="hljs-string">"Oblogout"</span>] fullscreen enable
+for_window [class=<span class="hljs-string">"octopi"</span>] floating enable
+for_window [title=<span class="hljs-string">"About Pale Moon"</span>] floating enable
+for_window [class=<span class="hljs-string">"Pamac-manager"</span>] floating enable
+for_window [class=<span class="hljs-string">"Pavucontrol"</span>] floating enable
+for_window [class=<span class="hljs-string">"qt5ct"</span>] floating enable sticky enable border normal
+for_window [class=<span class="hljs-string">"Qtconfig-qt4"</span>] floating enable sticky enable border normal
+for_window [class=<span class="hljs-string">"Simple-scan"</span>] floating enable border normal
+for_window [class=<span class="hljs-string">"(?i)System-config-printer.py"</span>] floating enable border normal
+for_window [class=<span class="hljs-string">"Thus"</span>] floating enable border normal
+for_window [class=<span class="hljs-string">"Timeset-gui"</span>] floating enable border normal
+for_window [class=<span class="hljs-string">"(?i)virtualbox"</span>] floating enable border normal
+for_window [class=<span class="hljs-string">"Xfburn"</span>] floating enable
+
+# <span class="hljs-keyword">switch</span> to <span class="hljs-keyword">workspace</span> with urgent <span class="hljs-keyword">window</span> automatically
+for_window [urgent=latest] focus
+
+# reload the configuration <span class="hljs-keyword">file</span>
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your <span class="hljs-keyword">layout</span>/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e <span class="hljs-keyword">exec</span> <span class="hljs-string">"i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"</span>
+
+# Set shut down, restart and locking features
+bindsym $mod+<span class="hljs-number">0</span> mode <span class="hljs-string">"$mode_system"</span>
+set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
+mode <span class="hljs-string">"$mode_system"</span> {
+    bindsym l <span class="hljs-keyword">exec</span> --no-startup-id i3exit lock, mode <span class="hljs-string">"default"</span>
+    bindsym s <span class="hljs-keyword">exec</span> --no-startup-id i3exit suspend, mode <span class="hljs-string">"default"</span>
+    bindsym u <span class="hljs-keyword">exec</span> --no-startup-id i3exit switch_user, mode <span class="hljs-string">"default"</span>
+    bindsym e <span class="hljs-keyword">exec</span> --no-startup-id i3exit logout, mode <span class="hljs-string">"default"</span>
+    bindsym h <span class="hljs-keyword">exec</span> --no-startup-id i3exit hibernate, mode <span class="hljs-string">"default"</span>
+    bindsym r <span class="hljs-keyword">exec</span> --no-startup-id i3exit reboot, mode <span class="hljs-string">"default"</span>
+    bindsym Shift+s <span class="hljs-keyword">exec</span> --no-startup-id i3exit shutdown, mode <span class="hljs-string">"default"</span>
+
+    # exit <span class="hljs-keyword">system</span> mode: <span class="hljs-string">"Enter"</span> or <span class="hljs-string">"Escape"</span>
+    bindsym Return mode <span class="hljs-string">"default"</span>
+    bindsym Escape mode <span class="hljs-string">"default"</span>
+}
+
+# Resize <span class="hljs-keyword">window</span> (you can also use the <span class="hljs-keyword">mouse</span> <span class="hljs-keyword">for</span> that)
+bindsym $mod+r mode <span class="hljs-string">"resize"</span>
+mode <span class="hljs-string">"resize"</span> {
+        # These bindings trigger as soon as you enter the resize mode
+        # Pressing left will shrink the <span class="hljs-keyword">window</span>’s width.
+        # Pressing right will grow the <span class="hljs-keyword">window</span>’s width.
+        # Pressing up will shrink the <span class="hljs-keyword">window</span>’s height.
+        # Pressing down will grow the <span class="hljs-keyword">window</span>’s height.
+        bindsym j resize shrink width <span class="hljs-number">5</span> px or <span class="hljs-number">5</span> ppt
+        bindsym k resize grow height <span class="hljs-number">5</span> px or <span class="hljs-number">5</span> ppt
+        bindsym l resize shrink height <span class="hljs-number">5</span> px or <span class="hljs-number">5</span> ppt
+        bindsym semicolon resize grow width <span class="hljs-number">5</span> px or <span class="hljs-number">5</span> ppt
+
+        # same bindings, but <span class="hljs-keyword">for</span> the arrow keys
+        bindsym Left resize shrink width <span class="hljs-number">10</span> px or <span class="hljs-number">10</span> ppt
+        bindsym Down resize grow height <span class="hljs-number">10</span> px or <span class="hljs-number">10</span> ppt
+        bindsym Up resize shrink height <span class="hljs-number">10</span> px or <span class="hljs-number">10</span> ppt
+        bindsym Right resize grow width <span class="hljs-number">10</span> px or <span class="hljs-number">10</span> ppt
+
+        # exit resize mode: Enter or Escape
+        bindsym Return mode <span class="hljs-string">"default"</span>
+        bindsym Escape mode <span class="hljs-string">"default"</span>
+}
+
+# Autostart applications
+<span class="hljs-keyword">exec</span> --no-startup-id nitrogen --restore; sleep <span class="hljs-number">1</span>; compton -b
+<span class="hljs-keyword">exec</span> --no-startup-id nm-applet
+# <span class="hljs-keyword">exec</span> --no-startup-id xfce4-power-manager
+<span class="hljs-keyword">exec</span> --no-startup-id pamac-tray
+<span class="hljs-keyword">exec</span> --no-startup-id clipit
+exec_always --no-startup-id ff-theme-util
+exec_always --no-startup-id fix_xcursor
+exec_always --no-startup-id $HOME/.config/polybar/i3wmthemer_bar_launch.sh
+
+# Theme colors
+client.focused #<span class="hljs-number">56737</span>a #<span class="hljs-number">1e1</span>e20 #<span class="hljs-number">56737</span>a #<span class="hljs-number">56737</span>a #<span class="hljs-number">56737</span>a
+client.focused_inactive #<span class="hljs-number">56737</span>a #<span class="hljs-number">1e1</span>e20 #<span class="hljs-number">56737</span>a #<span class="hljs-number">2</span>c5159 #<span class="hljs-number">2</span>c5159
+client.unfocused #<span class="hljs-number">56737</span>a #<span class="hljs-number">1e1</span>e20 #<span class="hljs-number">56737</span>a #<span class="hljs-number">2</span>c5159 #<span class="hljs-number">2</span>c5159
+client.urgent #<span class="hljs-number">56737</span>a #<span class="hljs-number">1e1</span>e20 #<span class="hljs-number">56737</span>a #<span class="hljs-number">2</span>c5159 #<span class="hljs-number">2</span>c5159
+client.placeholder #<span class="hljs-number">56737</span>a #<span class="hljs-number">1e1</span>e20 #<span class="hljs-number">56737</span>a #<span class="hljs-number">2</span>c5159 #<span class="hljs-number">2</span>c5159
+
+client.background #<span class="hljs-number">1e1</span>e20
+
+# Gaps
+gaps inner <span class="hljs-number">10</span>
+gaps outer <span class="hljs-number">-4</span>
+
+smart_gaps on
+
+# Press $mod+Shift+g to enter the gap mode. Choose o or i <span class="hljs-keyword">for</span> modifying outer/inner gaps. Press one of + / - (<span class="hljs-keyword">in</span>-/decrement <span class="hljs-keyword">for</span> current <span class="hljs-keyword">workspace</span>) or <span class="hljs-number">0</span> (remove gaps <span class="hljs-keyword">for</span> current <span class="hljs-keyword">workspace</span>). If you also press Shift with these keys, the change will be <span class="hljs-keyword">global</span> <span class="hljs-keyword">for</span> all workspaces.
+set $mode_gaps Gaps: (o) outer, (i) inner
+set $mode_gaps_outer Outer Gaps: +|-|<span class="hljs-number">0</span> (local), Shift + +|-|<span class="hljs-number">0</span> (<span class="hljs-keyword">global</span>)
+set $mode_gaps_inner Inner Gaps: +|-|<span class="hljs-number">0</span> (local), Shift + +|-|<span class="hljs-number">0</span> (<span class="hljs-keyword">global</span>)
+bindsym $mod+Shift+g mode <span class="hljs-string">"$mode_gaps"</span>
+
+mode <span class="hljs-string">"$mode_gaps"</span> {
+        bindsym o      mode <span class="hljs-string">"$mode_gaps_outer"</span>
+        bindsym i      mode <span class="hljs-string">"$mode_gaps_inner"</span>
+        bindsym Return mode <span class="hljs-string">"default"</span>
+        bindsym Escape mode <span class="hljs-string">"default"</span>
+}
+mode <span class="hljs-string">"$mode_gaps_inner"</span> {
+        bindsym plus  gaps inner current plus <span class="hljs-number">5</span>
+        bindsym minus gaps inner current minus <span class="hljs-number">5</span>
+        bindsym <span class="hljs-number">0</span>     gaps inner current set <span class="hljs-number">0</span>
+
+        bindsym Shift+plus  gaps inner all plus <span class="hljs-number">5</span>
+        bindsym Shift+minus gaps inner all minus <span class="hljs-number">5</span>
+        bindsym Shift+<span class="hljs-number">0</span>     gaps inner all set <span class="hljs-number">0</span>
+
+        bindsym Return mode <span class="hljs-string">"default"</span>
+        bindsym Escape mode <span class="hljs-string">"default"</span>
+}
+mode <span class="hljs-string">"$mode_gaps_outer"</span> {
+        bindsym plus  gaps outer current plus <span class="hljs-number">5</span>
+        bindsym minus gaps outer current minus <span class="hljs-number">5</span>
+        bindsym <span class="hljs-number">0</span>     gaps outer current set <span class="hljs-number">0</span>
+
+        bindsym Shift+plus  gaps outer all plus <span class="hljs-number">5</span>
+        bindsym Shift+minus gaps outer all minus <span class="hljs-number">5</span>
+        bindsym Shift+<span class="hljs-number">0</span>     gaps outer all set <span class="hljs-number">0</span>
+
+        bindsym Return mode <span class="hljs-string">"default"</span>
+        bindsym Escape mode <span class="hljs-string">"default"</span>
+}
+
+# set power-manager and volume <span class="hljs-keyword">control</span>
+<span class="hljs-keyword">exec</span> --no-startup-id mate-power-manager
+
+bindsym XF86AudioRaiseVolume <span class="hljs-keyword">exec</span> --no-startup-id amixer -D pulse sset Master <span class="hljs-number">5</span>%+ unmute
+bindsym XF86AudioLowerVolume <span class="hljs-keyword">exec</span> --no-startup-id amixer -D pulse sset Master <span class="hljs-number">5</span>%- unmute
+bindsym XF86AudioMute <span class="hljs-keyword">exec</span> --no-startup-id amixer -D pulse sset Master <span class="hljs-keyword">toggle</span>
+
+# touchpad on and off controller on laptop with Fn+&lt;touchpad <span class="hljs-keyword">control</span> functional key&gt;
+bindsym XF86TouchpadOn <span class="hljs-keyword">exec</span> --no-startup-id synclient Touchpadoff=<span class="hljs-number">0</span>
+bindsym XF86TouchpadOff <span class="hljs-keyword">exec</span> --no-startup-id synclient Touchpadoff=<span class="hljs-number">1</span></code></pre></body>
 </html>
