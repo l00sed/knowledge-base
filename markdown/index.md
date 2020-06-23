@@ -9,7 +9,8 @@ Updates: 06/17/2020
 
 1. [Introduction](introduction) 
 2. [Environments](environments)
- - ~/.bashrc 
- - ~/.vimrc 
+ - [~/.bashrc](environments#bashrc) 
+ - [~/.vimrc](environments#vimrc) 
+ - [~/.config/i3/config](environments#i3) 
 3. [Bookmarks](https://l-o-o-s-e-d.net/bookmarks) 
 4. [Reading List](https://l-o-o-s-e-d.net/reading-list) 

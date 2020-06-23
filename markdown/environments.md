@@ -4,7 +4,7 @@ Various dotfile setups and resources for setting up programming environments acr
 
 - [.bashrc](#bashrc) 
 - [.vimrc](#vimrc) 
-- [.config/i3/config](i3) 
+- [.config/i3/config](#i3) 
 <br>
 
 <a id='bashrc'></a> 
