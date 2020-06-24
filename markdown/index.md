@@ -3,7 +3,7 @@
 Collection of frequently referenced resources in code, design, fab, electronics, and digital art. This is a personal wiki that can be accessed through the [loosed](https://l-o-o-s-e-d.net) blog.
 
 Managed by [Daniel Tompkins](https://l-o-o-s-e-d.net/about)    
-Updates: 06/17/2020
+Updates: 06/23/2020
 
 <br>
 
@@ -11,6 +11,8 @@ Updates: 06/17/2020
 2. [Environments](environments)
  - [~/.bashrc](environments#bashrc) 
  - [~/.vimrc](environments#vimrc) 
+ - [~/.tmux.conf](environments#tmux) 
  - [~/.config/i3/config](environments#i3) 
+ - [~/.config/polybar/config](environments#polybar) 
 3. [Bookmarks](https://l-o-o-s-e-d.net/bookmarks) 
 4. [Reading List](https://l-o-o-s-e-d.net/reading-list) 

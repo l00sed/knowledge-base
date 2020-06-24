@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
     <link type="text/css" rel="stylesheet" href="assets/css/tomorrow-night-eighties.css" />
   </head>
-<body>
+<body style="margin-bottom: 50px;">
   <div id="top"></div>
   <div id="index" class="noselect">
     <a href="#top">
@@ -23,7 +23,9 @@
 <ul class="list">
 <li><a href="#bashrc">.bashrc</a> </li>
 <li><a href="#vimrc">.vimrc</a> </li>
-<li><a href="#i3">.config/i3/config</a> 
+<li><a href="#tmux">.tmux.conf</a> </li>
+<li><a href="#i3">.config/i3/config</a> </li>
+<li><a href="#polybar">.config/polybar/config</a>
 <br></li>
 </ul>
 <p><a id='bashrc'></a> </p>
@@ -114,12 +116,16 @@ export -f mkgif</code></pre><h3 id="5.-connected-android-phone-mirroring"><a cla
     <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;Home&gt;</span>
     <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;End&gt;</span>
   <span class="hljs-keyword">endif</span>
-<span class="hljs-keyword">endfunction</span></code></pre><h3 id="3.-[lightline](https://github.com/itchyny/lightline.vim)-plugin-settings"><a class="header-link" href="#3.-[lightline](https://github.com/itchyny/lightline.vim)-plugin-settings"></a>3. <a href="https://github.com/itchyny/lightline.vim">Lightline</a> plugin settings</h3>
+<span class="hljs-keyword">endfunction</span></code></pre><h3 id="3.-[vim-airline](https://github.com/vim-airline/vim-airline)-plugin-settings"><a class="header-link" href="#3.-[vim-airline](https://github.com/vim-airline/vim-airline)-plugin-settings"></a>3. <a href="https://github.com/vim-airline/vim-airline">vim-airline</a> plugin settings</h3>
+<pre class="hljs"><code><span class="hljs-keyword">let</span> g:airline_powerline_fonts=<span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> g:airline#extensions#tabline#enabled=<span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> g:airline_theme=<span class="hljs-string">'luna'</span></code></pre><p>You might also checkout <a href="https://github.com/itchyny/lightline.vim">Lightline</a>: </p>
 <pre class="hljs"><code><span class="hljs-keyword">let</span> g:lightline = {
 <span class="hljs-string">\</span> <span class="hljs-string">'colorscheme'</span> : <span class="hljs-string">'seoul256'</span>
 <span class="hljs-string">\</span> }</code></pre><h3 id="4.-other-loaded-plugins"><a class="header-link" href="#4.-other-loaded-plugins"></a>4. Other loaded plugins</h3>
 <pre class="hljs"><code>call plug#begin(<span class="hljs-string">'~/.vim/plugged'</span>)
-<span class="hljs-type">Plug</span> <span class="hljs-symbol">'itchyny</span>/lightline.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-airline/vim-airline'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-airline/vim-airline-themes'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'edkolev</span>/tmuxline.vim'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'scrooloose</span>/nerdtree'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/goyo.vim'
@@ -128,8 +134,41 @@ export -f mkgif</code></pre><h3 id="5.-connected-android-phone-mirroring"><a cla
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/vim-emoji'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-scripts/<span class="hljs-type">AutoComplPop'</span>
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vimwiki</span>/vimwiki'
-<span class="hljs-type">Plug</span> <span class="hljs-symbol">'suan</span>/vim-instant-markdown', {<span class="hljs-symbol">'for'</span>: <span class="hljs-symbol">'markdown'</span>}
-call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre><p><br></p>
+call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre><h3 id="5.-vim-colorschemes"><a class="header-link" href="#5.-vim-colorschemes"></a>5. Vim colorschemes</h3>
+<p>Checkout <a href="https://vimcolors.com/">~/.vim/colors</a> for some awesome <code>.vim</code> colorschemes to spruce up your edits!</p>
+<p><br></p>
+<p><a id='tmux'></a></p>
+<h2 id="~/.tmux.conf"><a class="header-link" href="#~/.tmux.conf"></a>~/.tmux.conf</h2>
+<h3 id="1.-my-tmux-configuration-file"><a class="header-link" href="#1.-my-tmux-configuration-file"></a>1. My tmux configuration file</h3>
+<pre class="hljs"><code><span class="hljs-comment"># Colored tmux</span>
+<span class="hljs-string">set </span>-g <span class="hljs-string">default-terminal </span><span class="hljs-string">"screen-256color"</span>
+<span class="hljs-string">set </span>-g <span class="hljs-string">history-limit </span><span class="hljs-string">5000
+</span><span class="hljs-string">set </span>-g <span class="hljs-string">mouse </span><span class="hljs-string">on
+</span><span class="hljs-built_in">set-option</span> -g <span class="hljs-string">status-position </span><span class="hljs-string">bottom
+</span><span class="hljs-built_in">set-option</span> -g <span class="hljs-string">status </span><span class="hljs-string">on
+</span><span class="hljs-built_in">set-option</span> -g <span class="hljs-string">status-interval </span>1
+<span class="hljs-string">source </span>~/<span class="hljs-string">tmuxline</span></code></pre><h3 id="2.-tmuxline-file-source"><a class="header-link" href="#2.-tmuxline-file-source"></a>2. tmuxline file source</h3>
+<pre class="hljs"><code># This tmux statusbar config was created by tmuxline.vim
+# on Tue, <span class="hljs-number">23</span> Jun <span class="hljs-number">2020</span>
+
+<span class="hljs-keyword">set</span> -g <span class="hljs-comment">status-justify</span> <span class="hljs-comment">"left"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status</span> <span class="hljs-comment">"on"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-left-style</span> <span class="hljs-comment">"none"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g message-command-style</span> <span class="hljs-comment">"fg=colour231,bg=colour29"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-right-style</span> <span class="hljs-comment">"none"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g pane-active-border-style</span> <span class="hljs-comment">"fg=colour36"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-style</span> <span class="hljs-comment">"none,bg=colour23"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g message-style</span> <span class="hljs-comment">"fg=colour231,bg=colour29"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g pane-border-style</span> <span class="hljs-comment">"fg=colour29"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-right-length</span> <span class="hljs-comment">"100"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-left-length</span> <span class="hljs-comment">"100"</span>
+setw <span class="hljs-comment">-g window-status-activity-style</span> <span class="hljs-comment">"none"</span>
+setw <span class="hljs-comment">-g window-status-separator</span> <span class="hljs-comment">""</span>
+setw <span class="hljs-comment">-g window-status-style</span> <span class="hljs-comment">"none,fg=colour231,bg=colour23"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-left</span> <span class="hljs-comment">"#[fg=colour231,bg=colour36] #S #[fg=colour36,bg=colour23,nobold,nounderscore,noitalics]"</span>
+<span class="hljs-keyword">set</span> <span class="hljs-comment">-g status-right</span> <span class="hljs-comment">"#[fg=colour29,bg=colour23,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour29] %Y-%m-%d  %H:%M #[fg=colour36,bg=colour29,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour36] #h "</span>
+setw <span class="hljs-comment">-g window-status-format</span> <span class="hljs-comment">"#[fg=colour231,bg=colour23] #I #[fg=colour231,bg=colour23] #W "</span>
+setw <span class="hljs-comment">-g window-status-current-format</span> <span class="hljs-comment">"#[fg=colour23,bg=colour29,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour29] #I #[fg=colour231,bg=colour29] #W #[fg=colour29,bg=colour23,nobold,nounderscore,noitalics]"</span></code></pre><p><br></p>
 <p><a id='i3'></a> </p>
 <h2 id="~/.config/i3/config"><a class="header-link" href="#~/.config/i3/config"></a>~/.config/i3/config</h2>
 <h3 id="1.-config-file-for-[i3wm](https://i3wm.org/)"><a class="header-link" href="#1.-config-file-for-[i3wm](https://i3wm.org/)"></a>1. Config file for <a href="https://i3wm.org/">i3wm</a></h3>
@@ -409,5 +448,206 @@ bindsym XF86AudioMute <span class="hljs-keyword">exec</span> --no-startup-id ami
 
 # touchpad on and off controller on laptop with Fn+&lt;touchpad <span class="hljs-keyword">control</span> functional key&gt;
 bindsym XF86TouchpadOn <span class="hljs-keyword">exec</span> --no-startup-id synclient Touchpadoff=<span class="hljs-number">0</span>
-bindsym XF86TouchpadOff <span class="hljs-keyword">exec</span> --no-startup-id synclient Touchpadoff=<span class="hljs-number">1</span></code></pre></body>
+bindsym XF86TouchpadOff <span class="hljs-keyword">exec</span> --no-startup-id synclient Touchpadoff=<span class="hljs-number">1</span></code></pre><p><br></p>
+<p><a id='polybar'></a></p>
+<h2 id="~/.config/polybar/config"><a class="header-link" href="#~/.config/polybar/config"></a>~/.config/polybar/config</h2>
+<h3 id="1.-[polybar](https://github.com/polybar/polybar)-is-a-customizable-taskbar-for-i3wm"><a class="header-link" href="#1.-[polybar](https://github.com/polybar/polybar)-is-a-customizable-taskbar-for-i3wm"></a>1. <a href="https://github.com/polybar/polybar">Polybar</a> is a customizable taskbar for i3wm</h3>
+<pre class="hljs"><code><span class="hljs-section">[bar/i3wmthemer_bar]</span>
+<span class="hljs-attr">width</span> = <span class="hljs-number">100</span>%
+<span class="hljs-attr">height</span> = <span class="hljs-number">27</span>
+<span class="hljs-attr">radius</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">fixed-center</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">background</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">foreground</span> = #c5c8c6
+
+<span class="hljs-attr">line-size</span> = <span class="hljs-number">3</span>
+<span class="hljs-attr">line-color</span> =
+
+<span class="hljs-attr">border-size</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">border-color</span> =
+
+<span class="hljs-attr">padding-left</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">padding-right</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">module-margin-left</span> = <span class="hljs-number">1</span>
+<span class="hljs-attr">module-margin-right</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">font-0</span> = <span class="hljs-string">"Source Code Pro Semibold:size=10;1"</span>
+<span class="hljs-attr">font-1</span> = <span class="hljs-string">"Font Awesome 5 Free:style=Solid:size=10;1"</span>
+<span class="hljs-attr">font-2</span> = <span class="hljs-string">"Font Awesome 5 Brands:size=10;1"</span>
+
+<span class="hljs-attr">modules-left</span> = i3
+<span class="hljs-attr">modules-center</span> = date
+<span class="hljs-attr">modules-right</span> = wlan battery powermenu
+
+<span class="hljs-attr">tray-position</span> =
+<span class="hljs-comment">;tray-padding =</span>
+<span class="hljs-attr">wm-restack</span> = i3
+<span class="hljs-attr">override-redirect</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">cursor-click</span> = pointer
+<span class="hljs-attr">cursor-scroll</span> = ns-resize
+<span class="hljs-section">
+[module/i3]</span>
+<span class="hljs-attr">type</span> = internal/i3
+<span class="hljs-attr">format</span> = &lt;label-state&gt; &lt;label-mode&gt;
+<span class="hljs-attr">index-sort</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">wrapping-scroll</span> = <span class="hljs-literal">false</span>
+
+<span class="hljs-attr">label-mode-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">label-mode-foreground</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">label-mode-background</span> = #<span class="hljs-number">56737</span>a
+
+<span class="hljs-attr">label-focused</span> = %index%
+<span class="hljs-attr">label-focused-background</span> = #<span class="hljs-number">2</span>c5159
+<span class="hljs-attr">label-focused-foreground</span> = #<span class="hljs-number">6</span>b7443
+<span class="hljs-attr">label-focused-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">label-unfocused</span> = %index%
+<span class="hljs-attr">label-unfocused-background</span> = #<span class="hljs-number">56737</span>a
+<span class="hljs-attr">label-unfocused-foreground</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">label-unfocused-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">label-visible</span> = %index%
+<span class="hljs-attr">label-visible-background</span> = #<span class="hljs-number">56737</span>a
+<span class="hljs-attr">label-visible-foreground</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">label-visible-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">label-urgent</span> = %index%
+<span class="hljs-attr">label-urgent-background</span> = #BA2922
+<span class="hljs-attr">label-urgent-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-section">
+[module/wlan]</span>
+<span class="hljs-attr">type</span> = internal/network
+<span class="hljs-attr">interface</span> = wlp2s0
+<span class="hljs-attr">interval</span> = <span class="hljs-number">3.0</span>
+
+<span class="hljs-attr">format-connected</span> = &lt;ramp-signal&gt; &lt;label-connected&gt;
+<span class="hljs-attr">format-connected-foreground</span> = #<span class="hljs-number">80969</span>b
+<span class="hljs-attr">format-connected-background</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">format-connected-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">label-connected</span> = %essid%
+
+<span class="hljs-attr">format-disconnected</span> =
+
+<span class="hljs-attr">ramp-signal-0</span> = 
+<span class="hljs-attr">ramp-signal-1</span> = 
+<span class="hljs-attr">ramp-signal-2</span> = 
+<span class="hljs-attr">ramp-signal-3</span> = 
+<span class="hljs-attr">ramp-signal-4</span> = 
+<span class="hljs-attr">ramp-signal-foreground</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-section">
+[module/eth]</span>
+<span class="hljs-attr">type</span> = internal/network
+<span class="hljs-attr">interface</span> = enp0s3
+<span class="hljs-attr">interval</span> = <span class="hljs-number">3.0</span>
+
+<span class="hljs-attr">format-connected-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">format-connected-foreground</span> = #<span class="hljs-number">80969</span>b
+<span class="hljs-attr">format-connected-background</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">format-connected-prefix</span> = <span class="hljs-string">" "</span>
+<span class="hljs-attr">format-connected-prefix-foreground</span> = #<span class="hljs-number">80969</span>b
+<span class="hljs-attr">label-connected</span> = %local_ip%
+
+<span class="hljs-attr">format-disconnected</span> =
+<span class="hljs-section">
+[module/date]</span>
+<span class="hljs-attr">type</span> = internal/date
+<span class="hljs-attr">interval</span> = <span class="hljs-number">5</span>
+
+<span class="hljs-attr">date</span> =
+<span class="hljs-attr">date-alt</span> = <span class="hljs-string">" %Y-%m-%d"</span>
+
+<span class="hljs-attr">time</span> = %I:%M
+<span class="hljs-attr">time-alt</span> = %I:%M:%S
+
+<span class="hljs-attr">format-prefix</span> = 
+<span class="hljs-attr">format-foreground</span> = #<span class="hljs-number">1</span>e1e20
+<span class="hljs-attr">format-background</span> = #<span class="hljs-number">416269</span>
+<span class="hljs-attr">format-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">label</span> = %date% %time%
+<span class="hljs-section">
+[module/powermenu]</span>
+<span class="hljs-attr">type</span> = custom/menu
+
+<span class="hljs-attr">expand-right</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">format-spacing</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">label-open</span> = 
+<span class="hljs-attr">label-open-foreground</span> = #<span class="hljs-number">56737</span>a
+<span class="hljs-attr">label-close</span> =  cancel
+<span class="hljs-attr">label-close-foreground</span> = #<span class="hljs-number">56737</span>a
+<span class="hljs-attr">label-separator</span> = |
+<span class="hljs-attr">label-separator-foreground</span> = #<span class="hljs-number">80969</span>b
+
+<span class="hljs-attr">menu-0-0</span> = reboot
+<span class="hljs-attr">menu-0-0-exec</span> = menu-open-<span class="hljs-number">1</span>
+<span class="hljs-attr">menu-0-1</span> = power <span class="hljs-literal">off</span>
+<span class="hljs-attr">menu-0-1-exec</span> = menu-open-<span class="hljs-number">2</span>
+<span class="hljs-attr">menu-0-2</span> = log <span class="hljs-literal">off</span>
+<span class="hljs-attr">menu-0-2-exec</span> = menu-open-<span class="hljs-number">3</span>
+
+<span class="hljs-attr">menu-1-0</span> = cancel
+<span class="hljs-attr">menu-1-0-exec</span> = menu-open-<span class="hljs-number">0</span>
+<span class="hljs-attr">menu-1-1</span> = reboot
+<span class="hljs-attr">menu-1-1-exec</span> = reboot
+
+<span class="hljs-attr">menu-2-0</span> = power <span class="hljs-literal">off</span>
+<span class="hljs-attr">menu-2-0-exec</span> = power<span class="hljs-literal">off</span>
+<span class="hljs-attr">menu-2-1</span> = cancel
+<span class="hljs-attr">menu-2-1-exec</span> = menu-open-<span class="hljs-number">0</span>
+
+<span class="hljs-attr">menu-3-0</span> = log <span class="hljs-literal">off</span>
+<span class="hljs-attr">menu-3-0-exec</span> = i3 exit logout
+<span class="hljs-attr">menu-3-1</span> = cancel
+<span class="hljs-attr">menu-3-1-exec</span> = menu-open-<span class="hljs-number">0</span>
+<span class="hljs-section">
+[module/battery]</span>
+<span class="hljs-attr">type</span> = internal/battery
+
+<span class="hljs-comment">; This is useful in case the battery never reports 100% charge</span>
+<span class="hljs-attr">full-at</span> = <span class="hljs-number">99</span>
+
+<span class="hljs-attr">battery</span> = BAT0
+<span class="hljs-attr">adapter</span> = AC
+
+<span class="hljs-attr">poll-interval</span> = <span class="hljs-number">5</span>
+<span class="hljs-attr">format-charging</span> = &lt;animation-charging&gt; &lt;label-charging&gt;
+<span class="hljs-attr">format-discharging</span> = &lt;animation-discharging&gt; &lt;label-discharging&gt;
+<span class="hljs-attr">label-charging</span> = %percentage%%
+<span class="hljs-attr">label-discharging</span> = %percentage%%
+<span class="hljs-attr">label-full</span> = Charged
+
+<span class="hljs-attr">animation-charging-0</span> = ▁ 
+<span class="hljs-attr">animation-charging-1</span> = ▂
+<span class="hljs-attr">animation-charging-2</span> = ▃
+<span class="hljs-attr">animation-charging-3</span> = ▄
+<span class="hljs-attr">animation-charging-4</span> = ▅
+<span class="hljs-attr">animation-charging-5</span> = ▆
+<span class="hljs-attr">animation-charging-6</span> = ▇ 
+<span class="hljs-attr">animation-charging-framerate</span> = <span class="hljs-number">1000</span>
+
+<span class="hljs-attr">animation-discharging-0</span> = ▇ 
+<span class="hljs-attr">animation-discharging-1</span> = ▆
+<span class="hljs-attr">animation-discharging-2</span> = ▅
+<span class="hljs-attr">animation-discharging-3</span> = ▄
+<span class="hljs-attr">animation-discharging-4</span> = ▃
+<span class="hljs-attr">animation-discharging-5</span> = ▂
+<span class="hljs-attr">animation-discharging-6</span> = ▁ 
+<span class="hljs-attr">animation-discharging-framerate</span> = <span class="hljs-number">1000</span>
+<span class="hljs-section">
+[settings]</span>
+<span class="hljs-attr">screenchange-reload</span> = <span class="hljs-literal">true</span>
+<span class="hljs-section">
+[global/wm]</span>
+<span class="hljs-attr">margin-top</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">margin-bottom</span> = <span class="hljs-number">0</span></code></pre><h3 id="2.-polybar-reloading-script"><a class="header-link" href="#2.-polybar-reloading-script"></a>2. Polybar reloading script</h3>
+<pre class="hljs"><code><span class="hljs-meta">#!/bin/env sh
+</span>
+pkill polybar
+sleep 1;
+polybar i3wmthemer_bar &amp;</code></pre></body>
 </html>
