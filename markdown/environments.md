@@ -6,7 +6,8 @@ Various dotfile setups and resources for setting up programming environments acr
 - [.vimrc](#vimrc) 
 - [.tmux.conf](#tmux) 
 - [.config/i3/config](#i3) 
-- [.config/polybar/config](#polybar)
+- [.config/polybar/config](#polybar) 
+  
 <br>
 
 <a id='bashrc'></a> 
