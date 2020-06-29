@@ -30,6 +30,7 @@
 <p><br></p>
 <p><a id='bashrc'></a> </p>
 <h2 id="~/.bashrc"><a class="header-link" href="#~/.bashrc"></a>~/.bashrc</h2>
+<p>Click <a href="bashrc">here</a> to view or copy (not recommended) my full .bashrc file.</p>
 <h3 id="1.-pretty-bash-prompt"><a class="header-link" href="#1.-pretty-bash-prompt"></a>1. Pretty Bash Prompt</h3>
 <pre class="hljs"><code>RCol='<span class="hljs-symbol">\0</span>33[0m'
 Gre='<span class="hljs-symbol">\0</span>33[32m';
@@ -37,19 +38,35 @@ Red='<span class="hljs-symbol">\0</span>33[31m';
 Blu='<span class="hljs-symbol">\0</span>33[34m';
 Yel='<span class="hljs-symbol">\0</span>33[33m';
 PS1="${RCol}┌─[<span class="hljs-symbol">\`</span>if [ <span class="hljs-symbol">\$</span>? = 0 ]; then echo "${Gre}"; else echo "${Red}"; fi<span class="hljs-symbol">\`</span><span class="hljs-symbol">\T</span><span class="hljs-symbol">\[</span>${Rcol}<span class="hljs-symbol">\]</span> <span class="hljs-symbol">\[</span>${Blu}<span class="hljs-symbol">\]</span><span class="hljs-symbol">\u</span>@<span class="hljs-symbol">\h</span><span class="hljs-symbol">\[</span>${RCol}<span class="hljs-symbol">\]</span> <span class="hljs-symbol">\[</span>${Yel}<span class="hljs-symbol">\]</span><span class="hljs-symbol">\w</span><span class="hljs-symbol">\[</span>${RCol}<span class="hljs-symbol">\]</span><span class="hljs-symbol">\$</span>(__git_ps1)]<span class="hljs-symbol">\n</span>└───▶ "</code></pre><h3 id="2.-quick-and-handy-server-alias"><a class="header-link" href="#2.-quick-and-handy-server-alias"></a>2. Quick and handy server alias</h3>
-<pre class="hljs"><code>npm <span class="hljs-keyword">install</span> -g browser-<span class="hljs-keyword">sync</span>
-<span class="hljs-keyword">export</span> ip4=$(ifdata -pa wlp2s0)
-<span class="hljs-keyword">alias</span> serve=<span class="hljs-string">"browser-sync start -s -f . --no-notify --extensions 'html' --host $ip4 --port 9000"</span></code></pre><h3 id="3.-tmux"><a class="header-link" href="#3.-tmux"></a>3. Tmux</h3>
+<ul class="list">
+<li>First install <a href="https://www.browsersync.io/">browser-sync</a></li>
+</ul>
+<pre class="hljs"><code>npm <span class="hljs-keyword">install</span> -g browser-<span class="hljs-keyword">sync</span></code></pre><ul class="list">
+<li>If you&#39;re using WSL or a virtual machine, you can set your local ip address to the &quot;host&quot; argument like so:</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-keyword">export</span> ip4=$(ifdata -pa wlp2s0)</code></pre><ul class="list">
+<li>Set the full command to an alias (i.e., in your ~/.bashrc file) for ease-of-use:</li>
+</ul>
+<pre class="hljs"><code><span class="hljs-comment">alias</span> <span class="hljs-comment">serve="browser</span><span class="hljs-literal">-</span><span class="hljs-comment">sync</span> <span class="hljs-comment">start</span> <span class="hljs-literal">-</span><span class="hljs-comment">s</span> <span class="hljs-literal">-</span><span class="hljs-comment">f</span> <span class="hljs-string">.</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">no</span><span class="hljs-literal">-</span><span class="hljs-comment">notify</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">extensions</span> <span class="hljs-comment">'html'</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">host</span> <span class="hljs-comment">$ip4</span> <span class="hljs-literal">-</span><span class="hljs-literal">-</span><span class="hljs-comment">port</span> <span class="hljs-comment">9000"</span></code></pre><h3 id="3.-tmux"><a class="header-link" href="#3.-tmux"></a>3. Tmux</h3>
+<ul class="list">
+<li>Quick and dirty Tmux aliases</li>
+</ul>
 <pre class="hljs"><code><span class="hljs-built_in">alias</span> td=<span class="hljs-string">'tmux detach'</span>
 <span class="hljs-built_in">alias</span> t0=<span class="hljs-string">'tmux attach -t 0'</span>
 <span class="hljs-built_in">alias</span> t1=<span class="hljs-string">'tmux attach -t 1'</span>
 <span class="hljs-built_in">alias</span> t2=<span class="hljs-string">'tmux attach -t 2'</span>
 <span class="hljs-built_in">alias</span> tmain=<span class="hljs-string">'tmux attach -t main'</span></code></pre><h3 id="4.-ffmpeg"><a class="header-link" href="#4.-ffmpeg"></a>4. FFMpeg</h3>
+<ul class="list">
+<li>Easily make gifs from the terminal with these bash aliases:</li>
+</ul>
 <pre class="hljs"><code><span class="hljs-built_in">alias</span> mkvid='ffmpeg -r <span class="hljs-number">1</span> -f image2 -pattern_type glob -i <span class="hljs-string">"*.png"</span> -vf <span class="hljs-built_in">scale</span>=<span class="hljs-number">720</span>:<span class="hljs-number">480</span> -filter:v <span class="hljs-string">"crop=in_w:480"</span> -vcodec libx264 -crf <span class="hljs-number">0</span> -pix_fmt yuv444p test.mp4'
 <span class="hljs-built_in">alias</span> convgif='ffmpeg -i test.mp4 -vf <span class="hljs-built_in">scale</span>=iw/<span class="hljs-number">2</span>:ih/<span class="hljs-number">2</span> -f gif test.gif'</code></pre><pre class="hljs"><code><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mkgif</span><span class="hljs-params">()</span> {</span>
   ffmpeg -pattern_type glob -r <span class="hljs-number">1</span> -i <span class="hljs-string">"$1"</span> -vf <span class="hljs-string">"scale='</span><span class="hljs-built_in">min</span>(<span class="hljs-number">640</span>,iw)<span class="hljs-string">':'</span><span class="hljs-built_in">min</span>(<span class="hljs-number">480</span>,ih)<span class="hljs-string">':force_original_aspect_ratio=decrease,pad=640:480:(ow-iw)/2:(oh-ih)/2"</span> -pix_fmt yuv420p -f gif output.gif
 }
 export -f mkgif</code></pre><h3 id="5.-connected-android-phone-mirroring"><a class="header-link" href="#5.-connected-android-phone-mirroring"></a>5. Connected Android phone mirroring</h3>
+<ul class="list">
+<li>Must install <a href="https://github.com/Genymobile/scrcpy">scrcpy</a> and have your phone connected with USB debugging enabled</li>
+</ul>
 <pre class="hljs"><code><span class="hljs-keyword">alias</span> android=<span class="hljs-symbol">'scrcpy</span> <span class="hljs-comment">--max-size 1080 --window-x 1920 --window-y 1080 --window-borderless -S'</span>
 <span class="hljs-keyword">alias</span> androidF=<span class="hljs-symbol">'android</span> <span class="hljs-comment">--fullscreen'</span></code></pre><h3 id="6.-easy/beautiful-low-quality-image-placeholders-(lqip)"><a class="header-link" href="#6.-easy/beautiful-low-quality-image-placeholders-(lqip)"></a>6. Easy/beautiful low-quality image placeholders (LQIP)</h3>
 <ul class="list">
@@ -124,22 +141,24 @@ export -f mkgif</code></pre><h3 id="5.-connected-android-phone-mirroring"><a cla
 <span class="hljs-string">\</span> <span class="hljs-string">'colorscheme'</span> : <span class="hljs-string">'seoul256'</span>
 <span class="hljs-string">\</span> }</code></pre><h3 id="4.-other-loaded-plugins"><a class="header-link" href="#4.-other-loaded-plugins"></a>4. Other loaded plugins</h3>
 <pre class="hljs"><code>call plug#begin(<span class="hljs-string">'~/.vim/plugged'</span>)
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vimwiki</span>/vimwiki'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-airline/vim-airline'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-airline/vim-airline-themes'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'edkolev</span>/tmuxline.vim'
-<span class="hljs-type">Plug</span> <span class="hljs-symbol">'scrooloose</span>/nerdtree'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/goyo.vim'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'scrooloose</span>/nerdtree'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'inkarkat</span>/vim-<span class="hljs-type">SpellCheck'</span>
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'inkarkat</span>/vim-ingo-library'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'etdev</span>/vim-hexcolor'
-<span class="hljs-type">Plug</span> <span class="hljs-symbol">'Yggdroot</span>/indentLine'
+<span class="hljs-type">Plug</span> <span class="hljs-symbol">'chrisbra</span>/<span class="hljs-type">Colorizer'</span>
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'junegunn</span>/vim-emoji'
 <span class="hljs-type">Plug</span> <span class="hljs-symbol">'vim</span>-scripts/<span class="hljs-type">AutoComplPop'</span>
-<span class="hljs-type">Plug</span> <span class="hljs-symbol">'vimwiki</span>/vimwiki'
-call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre><h3 id="5.-vim-colorschemes"><a class="header-link" href="#5.-vim-colorschemes"></a>5. Vim colorschemes</h3>
-<p>Checkout <a href="https://vimcolors.com/">~/.vim/colors</a> for some awesome <code>.vim</code> colorschemes to spruce up your edits!</p>
+call plug#<span class="hljs-keyword">end</span><span class="hljs-literal">()</span></code></pre><h3 id="5.-vim-color-schemes"><a class="header-link" href="#5.-vim-color-schemes"></a>5. Vim color-schemes</h3>
+<p>Checkout <a href="https://vimcolors.com/">~/.vim/colors</a> for some awesome <code>.vim</code> color-schemes to spruce up your edits!</p>
 <p><br></p>
 <p><a id='tmux'></a></p>
 <h2 id="~/.tmux.conf"><a class="header-link" href="#~/.tmux.conf"></a>~/.tmux.conf</h2>
-<h3 id="1.-my-tmux-configuration-file"><a class="header-link" href="#1.-my-tmux-configuration-file"></a>1. My tmux configuration file</h3>
+<h3 id="1.-my-full-[tmux](https://github.com/tmux/tmux/wiki)-configuration-file:"><a class="header-link" href="#1.-my-full-[tmux](https://github.com/tmux/tmux/wiki)-configuration-file:"></a>1. My full <a href="https://github.com/tmux/tmux/wiki">tmux</a> configuration file:</h3>
 <pre class="hljs"><code><span class="hljs-comment"># Colored tmux</span>
 <span class="hljs-string">set </span>-g <span class="hljs-string">default-terminal </span><span class="hljs-string">"screen-256color"</span>
 <span class="hljs-string">set </span>-g <span class="hljs-string">history-limit </span><span class="hljs-string">5000
@@ -171,6 +190,7 @@ setw <span class="hljs-comment">-g window-status-format</span> <span class="hljs
 setw <span class="hljs-comment">-g window-status-current-format</span> <span class="hljs-comment">"#[fg=colour23,bg=colour29,nobold,nounderscore,noitalics]#[fg=colour231,bg=colour29] #I #[fg=colour231,bg=colour29] #W #[fg=colour29,bg=colour23,nobold,nounderscore,noitalics]"</span></code></pre><p><br></p>
 <p><a id='i3'></a> </p>
 <h2 id="~/.config/i3/config"><a class="header-link" href="#~/.config/i3/config"></a>~/.config/i3/config</h2>
+<p>Click <a href="i3">here</a> to view or copy my full i3 config.</p>
 <h3 id="1.-config-file-for-[i3wm](https://i3wm.org/)"><a class="header-link" href="#1.-config-file-for-[i3wm](https://i3wm.org/)"></a>1. Config file for <a href="https://i3wm.org/">i3wm</a></h3>
 <pre class="hljs"><code>set $mod Mod4
 
@@ -451,6 +471,7 @@ bindsym XF86TouchpadOn <span class="hljs-keyword">exec</span> --no-startup-id sy
 bindsym XF86TouchpadOff <span class="hljs-keyword">exec</span> --no-startup-id synclient Touchpadoff=<span class="hljs-number">1</span></code></pre><p><br></p>
 <p><a id='polybar'></a></p>
 <h2 id="~/.config/polybar/config"><a class="header-link" href="#~/.config/polybar/config"></a>~/.config/polybar/config</h2>
+<p>Click <a href="polybar">here</a> to view or copy my full polybar config.</p>
 <h3 id="1.-[polybar](https://github.com/polybar/polybar)-is-a-customizable-taskbar-for-i3wm"><a class="header-link" href="#1.-[polybar](https://github.com/polybar/polybar)-is-a-customizable-taskbar-for-i3wm"></a>1. <a href="https://github.com/polybar/polybar">Polybar</a> is a customizable taskbar for i3wm</h3>
 <pre class="hljs"><code><span class="hljs-section">[bar/i3wmthemer_bar]</span>
 <span class="hljs-attr">width</span> = <span class="hljs-number">100</span>%

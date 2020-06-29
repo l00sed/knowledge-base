@@ -13,6 +13,8 @@ Various dotfile setups and resources for setting up programming environments acr
 <a id='bashrc'></a> 
 ## ~/.bashrc 
 
+Click [here](bashrc) to view or copy (not recommended) my full .bashrc file.
+
 ### 1. Pretty Bash Prompt 
 
 ```
@@ -26,13 +28,27 @@ PS1="${RCol}┌─[\`if [ \$? = 0 ]; then echo "${Gre}"; else echo "${Red}"; fi\
 
 ### 2. Quick and handy server alias 
 
+- First install [browser-sync](https://www.browsersync.io/)
+
 ```
 npm install -g browser-sync
+```
+
+- If you're using WSL or a virtual machine, you can set your local ip address to the "host" argument like so:
+
+```
 export ip4=$(ifdata -pa wlp2s0)
+```
+
+- Set the full command to an alias (i.e., in your ~/.bashrc file) for ease-of-use:
+
+```
 alias serve="browser-sync start -s -f . --no-notify --extensions 'html' --host $ip4 --port 9000"
 ```
 
 ### 3. Tmux 
+
+- Quick and dirty Tmux aliases
 
 ```
 alias td='tmux detach'
@@ -43,6 +59,8 @@ alias tmain='tmux attach -t main'
 ```
 
 ### 4. FFMpeg 
+
+- Easily make gifs from the terminal with these bash aliases:
 
 ```
 alias mkvid='ffmpeg -r 1 -f image2 -pattern_type glob -i "*.png" -vf scale=720:480 -filter:v "crop=in_w:480" -vcodec libx264 -crf 0 -pix_fmt yuv444p test.mp4'
@@ -57,6 +75,8 @@ export -f mkgif
 ```
 
 ### 5. Connected Android phone mirroring 
+
+- Must install [scrcpy](https://github.com/Genymobile/scrcpy) and have your phone connected with USB debugging enabled
 
 ```
 alias android='scrcpy --max-size 1080 --window-x 1920 --window-y 1080 --window-borderless -S'
@@ -167,28 +187,30 @@ let g:lightline = {
 
 ```
 call plug#begin('~/.vim/plugged')
+Plug 'vimwiki/vimwiki'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'junegunn/goyo.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'inkarkat/vim-SpellCheck'
+Plug 'inkarkat/vim-ingo-library'
 Plug 'etdev/vim-hexcolor'
-Plug 'Yggdroot/indentLine'
+Plug 'chrisbra/Colorizer'
 Plug 'junegunn/vim-emoji'
 Plug 'vim-scripts/AutoComplPop'
-Plug 'vimwiki/vimwiki'
 call plug#end()
 ```
-### 5. Vim colorschemes
+### 5. Vim color-schemes
 
-Checkout [~/.vim/colors](https://vimcolors.com/) for some awesome `.vim` colorschemes to spruce up your edits!
+Checkout [~/.vim/colors](https://vimcolors.com/) for some awesome `.vim` color-schemes to spruce up your edits!
 
 <br>
 
 <a id='tmux'></a>
 ## ~/.tmux.conf
 
-### 1. My tmux configuration file
+### 1. My full [tmux](https://github.com/tmux/tmux/wiki) configuration file:
 
 ```
 # Colored tmux
@@ -231,6 +253,8 @@ setw -g window-status-current-format "#[fg=colour23,bg=colour29,nobold,noundersc
 
 <a id='i3'></a> 
 ## ~/.config/i3/config 
+
+Click [here](i3) to view or copy my full i3 config.
 
 ### 1. Config file for [i3wm](https://i3wm.org/) 
 
@@ -517,6 +541,8 @@ bindsym XF86TouchpadOff exec --no-startup-id synclient Touchpadoff=1
 
 <a id='polybar'></a>
 ## ~/.config/polybar/config
+
+Click [here](polybar) to view or copy my full polybar config.
 
 ### 1. [Polybar](https://github.com/polybar/polybar) is a customizable taskbar for i3wm
 

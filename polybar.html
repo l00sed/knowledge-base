@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Full ~/.config/polybar/config</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/tomorrow-night-eighties.css" />
+  </head>
+<body style="margin-bottom: 50px;">
+  <div id="top"></div>
+  <div id="index" class="noselect">
+    <a href="#top">
+      <img src="assets/img/top.svg" />
+    </a>
+    <a href="/knowledge-base">
+      <img src="assets/img/index.svg" />
+    </a>
+  </div><h2 id="full-~/.config/polybar/config"><a class="header-link" href="#full-~/.config/polybar/config"></a>Full ~/.config/polybar/config</h2>
+<p>Some of these features won&#39;t work out-of-the-box for everyone! If you have issues, make sure you have all the proper fonts installed as well as rofi and the other utilities. Checkout the origin creator&#39;s <a href="https://github.com/adi1090x/polybar-themes">repo</a>. For display brightness, take a look at xbacklight versus backlight. You&#39;ll also have to find out your battery/adapter hardware and audio manager for those values to display properly. If you&#39;d like too look at individual polybar modules and tips, refer back to the <a href="environments">environments</a> page.</p>
+<h3 id="polybar/launch.sh"><a class="header-link" href="#polybar/launch.sh"></a>polybar/launch.sh</h3>
+<p>This launch scripts corresponds with my i3wm <a href="i3">config</a></p>
+<pre class="hljs"><code><span class="hljs-meta">#!/usr/bin/env sh
+</span>
+<span class="hljs-comment">## Add this to your wm startup file.</span>
+
+<span class="hljs-comment"># Terminate already running bar instances</span>
+killall -q polybar
+
+<span class="hljs-comment"># Wait until the processes have been shut down</span>
+<span class="hljs-keyword">while</span> pgrep -u <span class="hljs-variable">$UID</span> -x polybar &gt;/dev/null; <span class="hljs-keyword">do</span> sleep 1; <span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Launch bar1 and bar2</span>
+polybar -c ~/.config/polybar/config.ini main &amp;</code></pre><h3 id="polybar/config"><a class="header-link" href="#polybar/config"></a>polybar/config</h3>
+<pre class="hljs"><code><span class="hljs-section">[module/launcher]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content</span> = 
+
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade1}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">content-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-comment">;click-left = dmenu_run -b -l 5 -p Search -fn "Misc Termsyn" -nb "#1D1F28" -nf "#f7f7f7" -sb "#1E88E5" -sf "#202020"</span>
+<span class="hljs-attr">click-left</span> = rofi -show drun -show-icons -fullscreen <span class="hljs-literal">True</span> -lines <span class="hljs-number">5</span> -line-margin <span class="hljs-number">5</span> -padding <span class="hljs-number">300</span> -bw <span class="hljs-number">0</span>
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/title]</span>
+<span class="hljs-attr">type</span> = internal/xwindow
+
+<span class="hljs-attr">format</span> = &lt;label&gt;
+<span class="hljs-attr">format-background</span> = <span class="hljs-variable">${color.shade2}</span>
+<span class="hljs-attr">format-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">label</span> = %title%
+<span class="hljs-attr">label-maxlen</span> = <span class="hljs-number">30</span>
+
+<span class="hljs-comment">;;label-empty = Arch Linux</span>
+<span class="hljs-comment">;;label-empty-foreground = #707880</span>
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/workspaces]</span>
+<span class="hljs-attr">type</span> = internal/xworkspaces
+
+<span class="hljs-attr">pin-workspaces</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">enable-click</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">enable-scroll</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">label-active</span> = 
+<span class="hljs-attr">label-occupied</span> = 
+<span class="hljs-attr">label-urgent</span> = 
+<span class="hljs-attr">label-empty</span> = 
+
+<span class="hljs-attr">format</span> = &lt;label-state&gt;
+
+<span class="hljs-attr">label-monitor</span> = %name%
+<span class="hljs-attr">label-active-foreground</span> = <span class="hljs-variable">${color.accent}</span>
+<span class="hljs-attr">label-occupied-foreground</span> = <span class="hljs-variable">${color.scarlet}</span>
+<span class="hljs-attr">label-urgent-foreground</span> = <span class="hljs-variable">${color.red}</span>
+<span class="hljs-attr">label-empty-foreground</span> = <span class="hljs-variable">${color.modulefg-alt}</span>
+
+<span class="hljs-attr">label-active-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">label-urgent-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">label-occupied-padding</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">label-empty-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/alsa]</span>
+<span class="hljs-attr">type</span> = internal/alsa
+
+<span class="hljs-attr">format-volume</span> = &lt;ramp-volume&gt; &lt;label-volume&gt;
+<span class="hljs-attr">format-volume-background</span> = <span class="hljs-variable">${color.shade6}</span>
+<span class="hljs-attr">format-volume-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-volume-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">label-volume</span> = %percentage%%
+
+<span class="hljs-attr">format-muted-prefix</span> = 
+<span class="hljs-attr">label-muted</span> = <span class="hljs-string">" Muted"</span>
+<span class="hljs-attr">format-muted-background</span> = <span class="hljs-variable">${color.shade6}</span>
+<span class="hljs-attr">format-muted-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-muted-padding</span> = <span class="hljs-number">2</span>
+
+<span class="hljs-attr">ramp-volume-0</span> = 
+<span class="hljs-attr">ramp-volume-1</span> = 
+<span class="hljs-attr">ramp-volume-2</span> = 
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/backlight]</span>
+<span class="hljs-attr">type</span> = internal/backlight
+
+<span class="hljs-attr">card</span> = intel_backlight
+
+<span class="hljs-attr">format</span> = &lt;ramp&gt; &lt;label&gt;
+<span class="hljs-attr">format-background</span> = <span class="hljs-variable">${color.shade4}</span>
+<span class="hljs-attr">format-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">label</span> = %percentage%%
+
+<span class="hljs-attr">ramp-0</span> = 
+<span class="hljs-attr">ramp-1</span> = 
+<span class="hljs-attr">ramp-2</span> = 
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/battery]</span>
+<span class="hljs-attr">type</span> = internal/battery
+
+<span class="hljs-attr">full-at</span> = <span class="hljs-number">99</span>
+
+<span class="hljs-attr">battery</span> = BAT0
+<span class="hljs-attr">adapter</span> = AC
+
+<span class="hljs-attr">poll-interval</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">time-format</span> = %I:%M
+
+<span class="hljs-attr">format-charging</span> = &lt;animation-charging&gt; &lt;label-charging&gt;
+<span class="hljs-attr">format-charging-background</span> = <span class="hljs-variable">${color.shade5}</span>
+<span class="hljs-attr">format-charging-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-charging-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">format-discharging</span> = &lt;ramp-capacity&gt; &lt;label-discharging&gt;
+<span class="hljs-attr">format-discharging-background</span> = <span class="hljs-variable">${color.shade5}</span>
+<span class="hljs-attr">format-discharging-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-discharging-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">label-charging</span> = %percentage%%
+<span class="hljs-attr">label-discharging</span> = %percentage%%
+
+<span class="hljs-attr">label-full</span> = Charged
+<span class="hljs-attr">label-full-background</span> = <span class="hljs-variable">${color.shade5}</span>
+<span class="hljs-attr">label-full-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">label-full-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">ramp-capacity-0</span> = 
+<span class="hljs-attr">ramp-capacity-1</span> = 
+<span class="hljs-attr">ramp-capacity-2</span> = 
+<span class="hljs-attr">ramp-capacity-3</span> = 
+<span class="hljs-attr">ramp-capacity-4</span> = 
+<span class="hljs-attr">ramp-capacity-5</span> = 
+<span class="hljs-attr">ramp-capacity-6</span> = 
+<span class="hljs-attr">ramp-capacity-7</span> = 
+<span class="hljs-attr">ramp-capacity-8</span> = 
+<span class="hljs-attr">ramp-capacity-9</span> = 
+<span class="hljs-attr">ramp-capacity-10</span> = 
+
+<span class="hljs-attr">animation-charging-0</span> = 
+<span class="hljs-attr">animation-charging-1</span> = 
+<span class="hljs-attr">animation-charging-2</span> = 
+<span class="hljs-attr">animation-charging-3</span> = 
+<span class="hljs-attr">animation-charging-4</span> = 
+<span class="hljs-attr">animation-charging-5</span> = 
+
+<span class="hljs-attr">animation-charging-framerate</span> = <span class="hljs-number">750</span>
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/date]</span>
+<span class="hljs-attr">type</span> = internal/date
+<span class="hljs-attr">interval</span> = <span class="hljs-number">1.0</span>
+
+<span class="hljs-attr">time</span> =  %I:%M %p
+<span class="hljs-attr">time-alt</span> =  %m/%d/%Y%
+
+<span class="hljs-attr">format</span> = &lt;label&gt;
+<span class="hljs-attr">format-background</span> = <span class="hljs-variable">${color.shade2}</span>
+<span class="hljs-attr">format-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-padding</span> = <span class="hljs-number">1</span>
+<span class="hljs-attr">label</span> = %time%
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/powermenu]</span>
+<span class="hljs-attr">type</span> = custom/menu
+
+<span class="hljs-attr">expand-right</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">menu-0-0</span> = reboot
+<span class="hljs-attr">menu-0-0-exec</span> = menu-open-<span class="hljs-number">1</span>
+<span class="hljs-attr">menu-0-1</span> = shutdown
+<span class="hljs-attr">menu-0-1-exec</span> = menu-open-<span class="hljs-number">2</span>
+
+<span class="hljs-attr">menu-1-0</span> = back
+<span class="hljs-attr">menu-1-0-exec</span> = menu-open-<span class="hljs-number">0</span>
+<span class="hljs-attr">menu-1-1</span> = reboot
+<span class="hljs-attr">menu-1-1-exec</span> = systemctl reboot
+
+<span class="hljs-attr">menu-2-0</span> = shutdown
+<span class="hljs-attr">menu-2-0-exec</span> = systemctl power<span class="hljs-literal">off</span>
+<span class="hljs-attr">menu-2-1</span> = back
+<span class="hljs-attr">menu-2-1-exec</span> = menu-open-<span class="hljs-number">0</span>
+
+<span class="hljs-attr">format-spacing</span> = <span class="hljs-number">1</span> 
+<span class="hljs-attr">format-background</span> = <span class="hljs-variable">${color.shade1}</span>
+<span class="hljs-attr">format-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">label-open</span> = 
+<span class="hljs-attr">label-close</span> = 
+<span class="hljs-attr">label-separator</span> = |
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/network]</span>
+<span class="hljs-attr">type</span> = internal/network
+<span class="hljs-attr">interface</span> = wlp2s0
+
+<span class="hljs-attr">interval</span> = <span class="hljs-number">1.0</span>
+<span class="hljs-attr">accumulate-stats</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">unknown-as-up</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-attr">format-connected</span> = &lt;ramp-signal&gt; &lt;label-connected&gt;
+<span class="hljs-attr">format-connected-background</span> = <span class="hljs-variable">${color.shade3}</span>
+<span class="hljs-attr">format-connected-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-connected-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">format-disconnected</span> = &lt;label-disconnected&gt;
+<span class="hljs-attr">format-disconnected-background</span> = <span class="hljs-variable">${color.shade3}</span>
+<span class="hljs-attr">format-disconnected-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">format-disconnected-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">label-connected</span> = <span class="hljs-string">" %{A1:nm-connection-editor &amp;:} %essid%%{A}"</span>
+<span class="hljs-attr">label-disconnected</span> = %{A1:nm-connection-editor &amp;:}  <span class="hljs-literal">No</span> Connection%{A}
+<span class="hljs-attr">ramp-signal-0</span> = 
+
+<span class="hljs-attr">click-left</span> = networkmanager_dmenu &amp;
+<span class="hljs-section">
+
+[module/colors]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content</span> =  
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade7}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.modulefg}</span>
+<span class="hljs-attr">content-padding</span> = <span class="hljs-number">1</span>
+
+<span class="hljs-attr">click-left</span> = ~/.config/polybar/scripts/color-switch.sh &amp;
+<span class="hljs-attr">click-right</span> = ~/.config/polybar/scripts/type-switch.sh &amp;
+<span class="hljs-section">
+
+[color]</span>
+
+<span class="hljs-comment">; Active Shade </span>
+<span class="hljs-attr">shade1</span> = #<span class="hljs-number">004</span>D40
+<span class="hljs-attr">shade2</span> = #<span class="hljs-number">00695</span>C
+<span class="hljs-attr">shade3</span> = #<span class="hljs-number">00796</span>B
+<span class="hljs-attr">shade4</span> = #<span class="hljs-number">00897</span>B
+<span class="hljs-attr">shade5</span> = #<span class="hljs-number">009688</span>
+<span class="hljs-attr">shade6</span> = #<span class="hljs-number">26</span>A69A
+<span class="hljs-attr">shade7</span> = #<span class="hljs-number">4</span>DB6AC
+<span class="hljs-attr">shade8</span> = #<span class="hljs-number">80</span>CBC4
+
+<span class="hljs-comment">;; Active Colors</span>
+<span class="hljs-attr">bground</span> = #<span class="hljs-number">1</span>D1F28
+<span class="hljs-attr">fground</span> = #f7f7f7
+<span class="hljs-comment">;borderbg = #f7f7f7</span>
+<span class="hljs-attr">accent</span> = #<span class="hljs-number">00897</span>B
+<span class="hljs-attr">modulefg</span> = #f7f7f7
+<span class="hljs-attr">modulefg-alt</span> = #f7f7f7
+
+<span class="hljs-comment">;; Other</span>
+<span class="hljs-attr">trans</span> = #<span class="hljs-number">00000000</span>
+<span class="hljs-attr">white</span> = #FFFFFF
+<span class="hljs-attr">black</span> = #<span class="hljs-number">000000</span>
+
+<span class="hljs-comment">;; Material Colors</span>
+<span class="hljs-attr">red</span> = #e53935
+<span class="hljs-attr">pink</span> = #d81b60
+<span class="hljs-attr">purple</span> = #<span class="hljs-number">8</span>e24aa
+<span class="hljs-attr">deep-purple</span> = #<span class="hljs-number">5</span>e35b1
+<span class="hljs-attr">indigo</span> = #<span class="hljs-number">3949</span>ab
+<span class="hljs-attr">blue</span> = #<span class="hljs-number">1</span>e88e5
+<span class="hljs-attr">light-blue</span> = #<span class="hljs-number">039</span>be5
+<span class="hljs-attr">cyan</span> = #<span class="hljs-number">00</span>acc1
+<span class="hljs-attr">teal</span> = #<span class="hljs-number">00897</span>b
+<span class="hljs-attr">green</span> = #<span class="hljs-number">43</span>a047
+<span class="hljs-attr">light-green</span> = #<span class="hljs-number">7</span>cb342
+<span class="hljs-attr">lime</span> = #c0ca33
+<span class="hljs-attr">yellow</span> = #fdd835
+<span class="hljs-attr">amber</span> = #ffb300
+<span class="hljs-attr">orange</span> = #fb8c00
+<span class="hljs-attr">deep-orange</span> = #f4511e
+<span class="hljs-attr">brown</span> = #<span class="hljs-number">6</span>d4c41
+<span class="hljs-attr">scarlet</span> = #f85c37
+<span class="hljs-attr">grey</span> = #<span class="hljs-number">757575</span>
+<span class="hljs-attr">blue-gray</span> = #<span class="hljs-number">546</span>e7a
+<span class="hljs-section">
+
+[global/wm]</span>
+
+<span class="hljs-comment">;margin-bottom = 0</span>
+<span class="hljs-comment">;margin-top = 0</span>
+<span class="hljs-section">
+[bar/main]</span>
+
+<span class="hljs-attr">monitor</span> =
+<span class="hljs-attr">monitor-fallback</span> =
+<span class="hljs-attr">monitor-strict</span> = <span class="hljs-literal">false</span>
+<span class="hljs-attr">override-redirect</span> = <span class="hljs-literal">false</span>
+
+<span class="hljs-attr">bottom</span> = <span class="hljs-literal">false</span>
+<span class="hljs-attr">fixed-center</span> = <span class="hljs-literal">true</span>
+
+<span class="hljs-comment">;width = 98%</span>
+<span class="hljs-comment">;height = 22</span>
+<span class="hljs-comment">;offset-x = 1%</span>
+<span class="hljs-comment">;offset-y = 2%</span>
+<span class="hljs-attr">width</span> = <span class="hljs-number">100</span>%
+<span class="hljs-attr">height</span> = <span class="hljs-number">19</span>
+<span class="hljs-attr">offset-x</span> = <span class="hljs-number">0</span>%
+<span class="hljs-attr">offset-y</span> = <span class="hljs-number">0</span>%
+
+<span class="hljs-attr">background</span> = <span class="hljs-variable">${color.bground}</span>
+<span class="hljs-attr">foreground</span> = <span class="hljs-variable">${color.fground}</span>
+
+<span class="hljs-attr">radius-top</span> = <span class="hljs-number">0.0</span>
+<span class="hljs-attr">radius-bottom</span> = <span class="hljs-number">0.0</span>
+
+<span class="hljs-attr">overline-size</span> = <span class="hljs-number">2</span>
+<span class="hljs-attr">overline-color</span> = <span class="hljs-variable">${color.accent}</span>
+
+<span class="hljs-comment">;border-bottom-size = 2</span>
+<span class="hljs-comment">;border-color = ${color.borderbg}</span>
+
+<span class="hljs-attr">padding</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">module-margin-left</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">module-margin-right</span> = <span class="hljs-number">0</span>
+
+<span class="hljs-attr">font-0</span> = <span class="hljs-string">"NotoSans Nerd Font:style=Medium:size=11:antialias=true;3"</span>
+
+<span class="hljs-attr">modules-left</span> = launcher left1 title left2
+<span class="hljs-attr">modules-center</span> = workspaces
+<span class="hljs-attr">modules-right</span> = right7 colors right6 alsa right5 battery right4 backlight right3 network right2 date right1 powermenu
+
+<span class="hljs-attr">separator</span> =
+<span class="hljs-attr">spacing</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">dim-value</span> = <span class="hljs-number">1.0</span>
+<span class="hljs-attr">wm-name</span> = 
+<span class="hljs-attr">locale</span> = 
+
+<span class="hljs-attr">tray-position</span> = none
+<span class="hljs-attr">tray-detached</span> = <span class="hljs-literal">false</span>
+<span class="hljs-attr">tray-maxsize</span> = <span class="hljs-number">16</span>
+<span class="hljs-attr">tray-transparent</span> = <span class="hljs-literal">false</span>
+<span class="hljs-attr">tray-background</span> = <span class="hljs-variable">${color.bground}</span>
+<span class="hljs-attr">tray-offset-x</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">tray-offset-y</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">tray-padding</span> = <span class="hljs-number">0</span>
+<span class="hljs-attr">tray-scale</span> = <span class="hljs-number">1.0</span>
+
+<span class="hljs-attr">enable-ipc</span> = <span class="hljs-literal">true</span>
+<span class="hljs-section">
+[settings]</span>
+
+<span class="hljs-attr">throttle-output</span> = <span class="hljs-number">5</span>
+<span class="hljs-attr">throttle-output-for</span> = <span class="hljs-number">10</span>
+<span class="hljs-attr">throttle-input-for</span> = <span class="hljs-number">30</span>
+
+<span class="hljs-attr">screenchange-reload</span> = <span class="hljs-literal">false</span>
+
+<span class="hljs-attr">compositing-background</span> = source
+<span class="hljs-attr">compositing-foreground</span> = over
+<span class="hljs-attr">compositing-overline</span> = over
+<span class="hljs-attr">compositing-underline</span> = over
+<span class="hljs-attr">compositing-border</span> = over
+
+<span class="hljs-attr">pseudo-transparency</span> = <span class="hljs-literal">false</span>
+
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-comment">;; MODULES</span>
+<span class="hljs-comment">;; _-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_</span>
+<span class="hljs-section">
+[module/left1]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade2}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade1}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/left2]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.bground}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade2}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+
+<span class="hljs-comment">#+++++++++++++++++++++++++++++++++++++++</span>
+<span class="hljs-section">
+[module/right1]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade2}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade1}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/right2]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade3}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade2}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/right3]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade4}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade3}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/right4]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade5}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade4}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/right5]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade6}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade5}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/right6]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.shade7}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade6}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+<span class="hljs-section">
+[module/right7]</span>
+<span class="hljs-attr">type</span> = custom/text
+<span class="hljs-attr">content-background</span> = <span class="hljs-variable">${color.bground}</span>
+<span class="hljs-attr">content-foreground</span> = <span class="hljs-variable">${color.shade7}</span>
+<span class="hljs-attr">content</span> = <span class="hljs-string">"%{T3}%{T-}"</span>
+
+</code></pre></body>
+</html>

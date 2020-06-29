@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Full ~/.vimrc file:</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/pilcrow.css" />
+    <link type="text/css" rel="stylesheet" href="assets/css/hljs-github.min.css"/>
+    <link type="text/css" rel="stylesheet" href="assets/css/tomorrow-night-eighties.css" />
+  </head>
+<body style="margin-bottom: 50px;">
+  <div id="top"></div>
+  <div id="index" class="noselect">
+    <a href="#top">
+      <img src="assets/img/top.svg" />
+    </a>
+    <a href="/knowledge-base">
+      <img src="assets/img/index.svg" />
+    </a>
+  </div><h2 id="full-~/.vimrc-file:"><a class="header-link" href="#full-~/.vimrc-file:"></a>Full ~/.vimrc file:</h2>
+<p>Feel free to copy bits and pieces. The full file has many aliases and functions that will be unusable to people other than myself. This is more for my own benefit / backup. I recommend taking a look the <a href="environments">environments</a> page to get a breakdown of the useful bits and pieces.</p>
+<pre class="hljs"><code><span class="hljs-keyword">set</span> omnifunc=emoji#complete
+
+<span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;C-c&gt;</span> <span class="hljs-comment">"+y</span>
+
+<span class="hljs-keyword">noremap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Leader&gt;</span><span class="hljs-keyword">e</span> :<span class="hljs-keyword">call</span> Emoji()<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Emoji</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">execute</span> <span class="hljs-string">'%s/:\([^:]\+\):/\=emoji#for(submatch(1), submatch(0))/g'</span>
+  <span class="hljs-keyword">echo</span> <span class="hljs-string">'Switched out emojis!'</span>
+<span class="hljs-keyword">endfunction</span>
+
+<span class="hljs-keyword">noremap</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Leader&gt;</span>tw :<span class="hljs-keyword">call</span> ToggleWrap()<span class="hljs-symbol">&lt;CR&gt;</span>
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">ToggleWrap</span><span class="hljs-params">()</span></span>
+  <span class="hljs-keyword">if</span> &amp;wrap
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Wrap OFF"</span>
+    <span class="hljs-keyword">setlocal</span> nowrap
+    <span class="hljs-keyword">set</span> virtualedit=<span class="hljs-keyword">all</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span>
+    silent! <span class="hljs-keyword">nunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span>
+    silent! <span class="hljs-keyword">iunmap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-keyword">echo</span> <span class="hljs-string">"Wrap ON"</span>
+    <span class="hljs-keyword">setlocal</span> wrap linebreak nolist
+    <span class="hljs-keyword">set</span> virtualedit=
+    <span class="hljs-keyword">setlocal</span> <span class="hljs-keyword">display</span>+=lastline
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>   gk
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span> gj
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> g<span class="hljs-symbol">&lt;Home&gt;</span>
+    <span class="hljs-keyword">noremap</span>  <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  g<span class="hljs-symbol">&lt;End&gt;</span>
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Up&gt;</span>   <span class="hljs-symbol">&lt;C-o&gt;</span>gk
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Down&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>gj
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;Home&gt;</span> <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;Home&gt;</span>
+    <span class="hljs-keyword">inoremap</span> <span class="hljs-symbol">&lt;buffer&gt;</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;End&gt;</span>  <span class="hljs-symbol">&lt;C-o&gt;</span>g<span class="hljs-symbol">&lt;End&gt;</span>
+  <span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">endfunction</span>
+
+<span class="hljs-keyword">set</span> clipboard=unnamedplus
+
+<span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;silent&gt;</span> <span class="hljs-symbol">&lt;C-n&gt;</span> :NERDTreeFocus<span class="hljs-symbol">&lt;CR&gt;</span>
+
+<span class="hljs-keyword">colo</span> corvine
+<span class="hljs-comment">" colo vwilight</span>
+<span class="hljs-comment">" colo anderson</span>
+
+<span class="hljs-keyword">set</span> nocompatible
+<span class="hljs-keyword">syntax</span> <span class="hljs-keyword">on</span>
+<span class="hljs-keyword">syntax</span> enable
+<span class="hljs-keyword">filetype</span> <span class="hljs-keyword">on</span>
+<span class="hljs-keyword">filetype</span> plugin <span class="hljs-built_in">indent</span> <span class="hljs-keyword">on</span>
+
+<span class="hljs-keyword">set</span> mouse+=<span class="hljs-keyword">a</span>
+
+<span class="hljs-keyword">if</span> &amp;term =~ <span class="hljs-string">'^screen'</span>
+  <span class="hljs-keyword">set</span> ttymouse=xterm2
+<span class="hljs-keyword">endif</span>
+
+<span class="hljs-keyword">set</span> encoding=utf8
+<span class="hljs-keyword">set</span> spelllang=<span class="hljs-keyword">en</span>
+<span class="hljs-keyword">set</span> spell
+<span class="hljs-keyword">set</span> <span class="hljs-keyword">number</span>
+<span class="hljs-keyword">set</span> noswapfile
+<span class="hljs-keyword">set</span> softtabstop=<span class="hljs-number">2</span> tabstop=<span class="hljs-number">2</span> <span class="hljs-built_in">shiftwidth</span>=<span class="hljs-number">2</span> expandtab
+<span class="hljs-keyword">set</span> wrap
+<span class="hljs-keyword">set</span> incsearch
+<span class="hljs-keyword">set</span> smartcase
+<span class="hljs-keyword">set</span> smartindent
+<span class="hljs-keyword">set</span> smarttab
+<span class="hljs-keyword">set</span> ignorecase
+<span class="hljs-keyword">set</span> laststatus=<span class="hljs-number">2</span>
+<span class="hljs-keyword">set</span> noshowmode
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:vimwiki_list</span> = [{<span class="hljs-string">'path'</span>: <span class="hljs-string">'/var/www/l-o-o-s-e-d/html/knowledge-base/markdown/'</span>,
+      \ <span class="hljs-string">'syntax'</span>: <span class="hljs-string">'markdown'</span>,
+      \ <span class="hljs-string">'template_path'</span>: <span class="hljs-string">'/var/www/l-o-o-s-e-d/html/knowledge-base/loosed-template/'</span>,
+      \ <span class="hljs-string">'template_default'</span>: <span class="hljs-string">'default'</span>,
+      \ <span class="hljs-string">'ext'</span>: <span class="hljs-string">'.md'</span>,
+      \ <span class="hljs-string">'path_html'</span>: <span class="hljs-string">'/var/www/l-o-o-s-e-d/html/knowledge-base/'</span>,
+      \ <span class="hljs-string">'custom_wiki2html'</span>: <span class="hljs-string">'vimwiki_markdown'</span>,
+      \ <span class="hljs-string">'template_ext'</span>: <span class="hljs-string">'.tpl'</span>}]
+
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:tmuxline_powerline_separators</span>=<span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:airline_powerline_fonts</span>=<span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:airline</span>#extensions#tabline#enabled=<span class="hljs-number">1</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:airline_theme</span>=<span class="hljs-string">'luna'</span>
+
+<span class="hljs-keyword">call</span> plug#begin(<span class="hljs-string">'~/.vim/plugged'</span>)
+Plug <span class="hljs-string">'vimwiki/vimwiki'</span>
+Plug <span class="hljs-string">'vim-airline/vim-airline'</span>
+Plug <span class="hljs-string">'vim-airline/vim-airline-themes'</span>
+Plug <span class="hljs-string">'edkolev/tmuxline.vim'</span>
+Plug <span class="hljs-string">'junegunn/goyo.vim'</span>
+Plug <span class="hljs-string">'scrooloose/nerdtree'</span>
+Plug <span class="hljs-string">'inkarkat/vim-SpellCheck'</span>
+Plug <span class="hljs-string">'inkarkat/vim-ingo-library'</span>
+Plug <span class="hljs-string">'etdev/vim-hexcolor'</span>
+Plug <span class="hljs-string">'chrisbra/Colorizer'</span>
+Plug <span class="hljs-string">'junegunn/vim-emoji'</span>
+Plug <span class="hljs-string">'vim-scripts/AutoComplPop'</span>
+<span class="hljs-keyword">call</span> plug#end()</code></pre></body>
+</html>
