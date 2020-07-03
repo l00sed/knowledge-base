@@ -29,6 +29,10 @@
   src: url('./PublicSans-Black.otf') format('opentype');
 }
 
+img {
+  width: 100%;
+}
+
 #index {
   position: fixed;
   right: 35px;

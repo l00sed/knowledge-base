@@ -1,6 +1,16 @@
 # Environments
 
-Various dotfile setups and resources for setting up programming environments across various servers remote and local.
+
+My main/mobile laptop runs Canonical's [Ubuntu 18.04](https://releases.ubuntu.com/18.04/) with the [i3](https://i3wm.org/) window tiling manager. I'm looking forward to trying out [Regolith](https://regolith-linux.org/), which is a preconfigured operating system `.iso` with Ubuntu and i3 pre-configured.
+I love the simplicity of Ubuntu, and the beautiful design and efficiency of i3.
+
+In addition to the desktop tiling, I multi-task in [Tmux](https://github.com/tmux/tmux/wiki)&mdash; a terminal tiler&mdash; and edit/write in [Vim](https://www.vim.org/). Here you'll find my various dotfile setups and resources for setting up my local environment.
+
+<br>
+
+![Regolith Homepage on my Ubuntu/i3/Tmux/Vim setup](/assets/img/knowledge-base/environments_screen.jpg)
+
+<br>
 
 - [.bashrc](#bashrc) 
 - [.vimrc](#vimrc) 
@@ -120,6 +130,8 @@ export -f polyAll
 
 <a id='vimrc'></a> 
 ## ~/.vimrc 
+
+Click [here](vimrc) to view or copy (not recommended) my full .vimrc file
 
 ### 1. Vimwiki settings 
 
